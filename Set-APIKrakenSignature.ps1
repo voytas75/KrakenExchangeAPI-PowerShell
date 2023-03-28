@@ -38,13 +38,13 @@ function Set-APIKrakenSignature {
 
 
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = "The payload for the API request, as an OrderedDictionary.")]
         [System.Collections.Specialized.OrderedDictionary]$Payload,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = "The URI for the API request, as a string.")]
         [string]$URI,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage = "The API secret for the Kraken account, as a string.")]
         [string]$api_secret
     )
 
