@@ -1,9 +1,19 @@
 function Set-APIKrakenSignature {
     <#
 .SYNOPSIS
-    A short one-line action-based description, e.g. 'Tests if a function is valid'
+    Calculates the signature for a Kraken API request.
+
 .DESCRIPTION
-    A longer description of the function, its purpose, common use cases, etc.
+    Calculates the signature for a Kraken API request using the specified payload, URI, and API secret.
+
+.PARAMETER Payload
+    The payload for the API request, as an OrderedDictionary.
+
+.PARAMETER URI
+    The URI for the API request, as a string.
+
+.PARAMETER api_secret
+    The API secret for the Kraken account, as a string.
 .NOTES
     Both [System.Security.Cryptography.HashAlgorithm]::Create('SHA256') and [System.Security.Cryptography.SHA256]::Create() create an instance of the SHA256 hashing algorithm provided by the .NET Framework's System.Security.Cryptography namespace. The difference between them is that the former creates an instance of the HashAlgorithm class and the latter creates an instance of the SHA256 class, which inherits from HashAlgorithm.
     The HashAlgorithm class is an abstract base class that provides the basic functionality common to all hash algorithms. It defines the ComputeHash method, which computes the hash value for a given input, as well as other methods and properties that are common to all hash algorithms. When you create an instance of the SHA256 algorithm using [System.Security.Cryptography.HashAlgorithm]::Create('SHA256'), you are creating an instance of the SHA256Managed class, which is a concrete implementation of the SHA256 algorithm that inherits from HashAlgorithm.
@@ -12,8 +22,18 @@ function Set-APIKrakenSignature {
     [System.Security.Cryptography.HMAC]::Create("HMACSHA512") - it works too.LINK
     Specify a URI to a help page, this will show when Get-Help -Online is used.
 .EXAMPLE
-    Test-MyTestFunction -Verbose
-    Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+    PS C:\> $payload = [System.Collections.Specialized.OrderedDictionary]::new()
+    PS C:\> $payload.Add("nonce", [Math]::Floor((Get-Date -Utc).Subtract((Get-Date -Utc).Date).TotalMilliseconds))
+    PS C:\> $payload.Add("ordertype", "limit")
+    PS C:\> $payload.Add("type", "buy")
+    PS C:\> $payload.Add("pair", "XXBTZUSD")
+    PS C:\> $payload.Add("price", "9000")
+    PS C:\> $payload.Add("volume", "0.01")
+    PS C:\> Set-APIKrakenSignature -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
+
+.NOTES
+    Author: wnapierala [@] hotmail.com
+    Date: 03.2023
 #>
 
 
