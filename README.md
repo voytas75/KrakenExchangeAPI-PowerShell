@@ -14,7 +14,7 @@ Here are some examples of how to use scripts:
 # Get ticker information for BTC/USD
 .\Get-KrakenTicker.ps1 -Pair 'ETH/USD'
 
-# Gets signature
+# Get signature
 PS C:\> $payload = [System.Collections.Specialized.OrderedDictionary]::new()
 PS C:\> $payload.Add("nonce", [int64]([DateTime]::UtcNow - (New-Object DateTime 1970, 1, 1, 0, 0, 0, 0, ([DateTimeKind]::Utc))).TotalMilliseconds
 PS C:\> $payload.Add("ordertype", "limit")
