@@ -23,7 +23,7 @@ function Set-APIKrakenSignature {
     Specify a URI to a help page, this will show when Get-Help -Online is used.
 .EXAMPLE
     PS C:\> $payload = [System.Collections.Specialized.OrderedDictionary]::new()
-    PS C:\> $payload.Add("nonce", [Math]::Floor((Get-Date -Utc).Subtract((Get-Date -Utc).Date).TotalMilliseconds))
+    PS C:\> $payload.Add("nonce", [int64]([DateTime]::UtcNow - (New-Object DateTime 1970, 1, 1, 0, 0, 0, 0, ([DateTimeKind]::Utc))).TotalMilliseconds
     PS C:\> $payload.Add("ordertype", "limit")
     PS C:\> $payload.Add("type", "buy")
     PS C:\> $payload.Add("pair", "XXBTZUSD")
