@@ -1,2 +1,2 @@
 # KrakenExchangeAPI-PowerShell
-PowerShell Kraken Exchange API script
+PowerShell Kraken Exchange API scripts
