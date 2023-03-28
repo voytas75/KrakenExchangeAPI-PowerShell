@@ -12,7 +12,7 @@ Here are some examples of how to use scripts:
 
 ```powershell
 # Get ticker information for BTC/USD
-.\Get-KrakenTicker -Pair 'ETH/USD'
+.\Get-KrakenTicker.ps1 -Pair 'ETH/USD'
 
 # Gets signature
 PS C:\> $payload = [System.Collections.Specialized.OrderedDictionary]::new()
@@ -22,7 +22,7 @@ PS C:\> $payload.Add("type", "buy")
 PS C:\> $payload.Add("pair", "XXBTZUSD")
 PS C:\> $payload.Add("price", "9000")
 PS C:\> $payload.Add("volume", "0.01")
-PS C:\> Set-APIKrakenSignature -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
+PS C:\> .\Set-APIKrakenSignature.ps1 -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
 ```
 
 ## Contributing
