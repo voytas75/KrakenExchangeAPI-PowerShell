@@ -36,7 +36,7 @@ Before contributing, please review our [contribution guidelines](CONTRIBUTING.md
 
 ## License
 
-This project is licensed under the terms of the [GNU General Public License (GPL) version 3](LICENSE.txt).
+This project is licensed under the terms of the [GNU General Public License (GPL) version 3](LICENSE).
 
 The GPL is a copyleft license, which means that any derivative works must be distributed under the same terms. This ensures that the code remains free and open source.
 
