@@ -23,6 +23,8 @@ PS C:\> $payload.Add("pair", "XXBTZUSD")
 PS C:\> $payload.Add("price", "9000")
 PS C:\> $payload.Add("volume", "0.01")
 PS C:\> .\Set-APIKrakenSignature.ps1 -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
+
+(.\kraken.ps1 -ApiKey $env:apikey -ApiSecret $env:ApiSecret -TradeVolume).result | select -ExpandProperty volume
 ```
 
 ## Contributing
