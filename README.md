@@ -13,6 +13,16 @@ Here are some examples of how to use scripts:
 ```powershell
 # Get ticker information for BTC/USD
 .\Get-KrakenTicker -Pair 'ETH/USD'
+
+# Gets signature
+PS C:\> $payload = [System.Collections.Specialized.OrderedDictionary]::new()
+PS C:\> $payload.Add("nonce", [int64]([DateTime]::UtcNow - (New-Object DateTime 1970, 1, 1, 0, 0, 0, 0, ([DateTimeKind]::Utc))).TotalMilliseconds
+PS C:\> $payload.Add("ordertype", "limit")
+PS C:\> $payload.Add("type", "buy")
+PS C:\> $payload.Add("pair", "XXBTZUSD")
+PS C:\> $payload.Add("price", "9000")
+PS C:\> $payload.Add("volume", "0.01")
+PS C:\> Set-APIKrakenSignature -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
 ```
 
 ## Contributing
