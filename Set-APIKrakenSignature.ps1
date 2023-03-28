@@ -36,7 +36,7 @@ function Set-APIKrakenSignature {
     Date: 03.2023
 #>
 
-
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, HelpMessage = "The payload for the API request, as an OrderedDictionary.")]
         [System.Collections.Specialized.OrderedDictionary]$Payload,
