@@ -88,6 +88,41 @@ function Show-Help {
     exit 0
 }
 
+function Test-EnvVariable {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$Name
+    )
+
+    $envVar = [Environment]::GetEnvironmentVariable($Name) 
+    if ($envVar) {
+        return $envVar
+    }
+    else {
+        return $null
+    }
+}
+
+<# if(-not (Test-EnvVariable -Name 'ApiKey')) {
+    Write-Output "No env:ApiKey."
+}
+
+if(-not (Test-EnvVariable -Name 'ApiSecret')) {
+    Write-Output "No env:ApiSecret."
+}
+ #>
+
+if($null -eq $ApiKey) {
+    Write-Output "[WARNING] No ApiKey."
+}
+
+if($null -eq $ApiSecret) {
+    Write-Output "[WARNING] No ApiSecret."
+}
+
+
+
+
 if ($help.IsPresent) {
     <# Action to perform if the condition is true #>
     Show-Help
