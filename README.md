@@ -10,7 +10,7 @@ Download scripts.
 
 To get a Kraken API Key and API Secret, you will need to follow these steps:
 
-1. Create a Kraken account if you don't already have one. You can sign up at https://www.kraken.com/signup.
+1. Create a Kraken account if you don't already have one. You can sign up at <https://www.kraken.com/signup>.
 
 2. Log in to your Kraken account and click on the "Settings" tab in the top right corner.
 
