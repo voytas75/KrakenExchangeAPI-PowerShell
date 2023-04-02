@@ -13,6 +13,18 @@ Thank you for your interest in contributing to KrakenExchangeAPI-PowerShell! Thi
 
 We follow the PowerShell coding standard. Please ensure that your code adheres to this standard before submitting a pull request. Additionally, we expect all new code to be well-tested using Pester.
 
+### Some of the best practices for PowerShell code include:
+
+* Using cmdlet and parameter names that follow the verb-noun naming convention (e.g. Get-ChildItem, Set-Item)
+* Using approved verbs for cmdlet names (you can see a list of approved verbs by running the command Get-Verb)
+* Using parameter sets to define different ways that a cmdlet can be used
+* Writing comment-based help for functions and cmdlets
+* Avoiding the use of aliases, and instead using the full command name (e.g. using Get-ChildItem instead of ls)
+* Using proper indentation and whitespace for readability
+* Using consistent formatting for code blocks, such as using curly braces on a new line rather than on the same line as the statement
+  
+In addition to these best practices, there are several tools available to help enforce PowerShell coding standards, such as PSScriptAnalyzer, which can analyze your PowerShell code for common issues and violations of best practices.
+
 ## Issue Reporting
 
 If you find an issue with the KrakenExchangeAPI-PowerShell codebase, please report it by opening an issue on GitHub. Please include a clear description of the issue, steps to reproduce it, and any relevant code or error messages.
