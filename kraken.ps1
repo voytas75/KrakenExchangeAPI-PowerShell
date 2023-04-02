@@ -66,6 +66,9 @@ param (
     [Switch]$ServerTime,
     
     [Parameter()]
+    [Switch]$SystemStatus,
+
+    [Parameter()]
     [Switch]$OHLC,
     
     [Parameter()]
@@ -86,10 +89,10 @@ param (
     [string]$TickerPair = "ETHUSD",
     
     [Parameter(Mandatory = $false)]
-    [string]$ApiKey,
+    [string]$ApiKey = $env:ApiKey,
     
     [Parameter(Mandatory = $false)]
-    [string]$ApiSecret,
+    [string]$ApiSecret = $env:ApiSecret,
     
     [Parameter()]
     [Switch]$Help
@@ -126,13 +129,30 @@ function Test-EnvVariable {
     }
 }
 
+. $PSScriptRoot\Set-APIKrakenSignature.ps1
+
 if ($help.IsPresent) {
     <# Action to perform if the condition is true #>
     Show-Help
 }
 
-. $PSScriptRoot\Set-APIKrakenSignature.ps1
 
+if ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent) {
+    if (-not ($ApiKey) -and -not ($ApiSecret)) {
+        Write-Warning "[WARNING] No ApiKey and ApiSecret."
+        Show-Help
+    }
+    elseif (($ApiKey) -and -not ($ApiSecret) ) {
+        <# Action when this condition is true #>
+        Write-Warning "[WARNING] No ApiSecret."
+        Show-Help
+    }
+    elseif ($null -eq $ApiKey -and (Test-Path env:apiSecret) ) {
+        <# Action when this condition is true #>
+        Write-Warning "[WARNING] No ApiKey."
+        Show-Help
+    }
+}
 #useragent
 $useragent = "myuseragent/1.0"
 
@@ -150,18 +170,6 @@ $AccountBalanceMethod = "/0/private/Balance"
 $TradeBalanceMethod = "/0/private/TradeBalance"
 $TradeVolumeMethod = "/0/private/TradeVolume"
 
-if ($null -eq $ApiKey -and $null -eq $ApiSecret -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
-    Write-Output "[WARNING] No ApiKey and ApiSecret."
-    Show-Help
-} elseif ((Test-Path env:\apiKey) -and $null -eq $ApiSecret -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
-    <# Action when this condition is true #>
-    Write-Output "[WARNING] No ApiSecret."
-    Show-Help
-} elseif ($null -eq $ApiKey -and (Test-Path env:\apiSecret) -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
-    <# Action when this condition is true #>
-    Write-Output "[WARNING] No ApiKey."
-    Show-Help
-}
 # Generate nonce
 $nonce = [Math]::Round((New-TimeSpan -Start "1/1/1970").TotalMilliseconds)
 # what is nonce: https://support.kraken.com/hc/en-us/articles/360000906023-What-is-a-nonce-
