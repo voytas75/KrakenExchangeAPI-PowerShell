@@ -1,4 +1,3 @@
-
 #Requires -Version 7.0
 
 <#
@@ -52,27 +51,49 @@
     https://docs.kraken.com/rest/#tag/Market-Data/operation/getTickerInformation
     https://algotrading101.com/learn/kraken-api-guide/
     
-    Author: wnapierala [@] hotmail.com
+    Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
-    #>
-
+#>
 
 param (
-    [switch]$SystemStatus,
-    [switch]$TradeBalance,
-    [switch]$AccountBalance,
-    [switch]$ServerTime,
-    [switch]$OHLC,
+    [Parameter()]
+    [Switch]$TradeBalance,
+    
+    [Parameter()]
+    [Switch]$AccountBalance,
+    
+    [Parameter()]
+    [Switch]$ServerTime,
+    
+    [Parameter()]
+    [Switch]$OHLC,
+    
+    [Parameter()]
+    [ValidateRange(1, 1440)]
     [int]$OHLCSince = 15,
+    
+    [Parameter()]
+    [ValidateRange(1, 1440)]
     [int]$OHLCInterval = 15,
-    [switch]$TradeVolume,
-    [switch]$Ticker,
+    
+    [Parameter()]
+    [Switch]$TradeVolume,
+    
+    [Parameter()]
+    [Switch]$Ticker,
+    
+    [Parameter()]
     [string]$TickerPair = "ETHUSD",
-    [string]$ApiKey = $env:apiKey,
-    [string]$ApiSecret = $env:ApiSecret,
-    [switch]$Help
+    
+    [Parameter(Mandatory = $false)]
+    [string]$ApiKey = $(if (Test-Path env:\apiKey) { $env:apiKey }),
+    
+    [Parameter(Mandatory = $false)]
+    [string]$ApiSecret = $(if (Test-Path env:\apiSecret) { $env:apiSecret }),
+    
+    [Parameter()]
+    [Switch]$Help
 )
-
 function Show-Help {
     Write-Host "Kraken PowerShell script"
     Write-Host "Usage: kraken.ps1 [-ApiKey <string>] [-ApiSecret <string>] [-SystemStatus] [-TradeBalance] [-AccountBalance] [-ServerTime] [-OHLC] [-OHLCSince <int>] [-OHLCInterval <int>] [-TradeVolume]"
@@ -105,14 +126,6 @@ function Test-EnvVariable {
     }
 }
 
-<# if(-not (Test-EnvVariable -Name 'ApiKey')) {
-    Write-Output "No env:ApiKey."
-}
-
-if(-not (Test-EnvVariable -Name 'ApiSecret')) {
-    Write-Output "No env:ApiSecret."
-}
- #>
 
 if ($null -eq $ApiKey) {
     Write-Output "[WARNING] No ApiKey."
@@ -166,7 +179,7 @@ if ($ticker.IsPresent) {
     <# Action to perform if the condition is true #>
     $TickerUrl = $endpoint + $TickerMethod
     $TickerParams = [ordered]@{ 
-        "pair"  = "ETHUSD" 
+        "pair" = "ETHUSD" 
     }
 
     $Tickerheaders = @{ 
