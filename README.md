@@ -32,7 +32,10 @@ Here are some examples of how to use scripts. The most important is the REST API
 
 ```powershell
 # Get trade volume using wrapper
-(.\kraken.ps1 -ApiKey $env:apikey -ApiSecret $env:ApiSecret -TradeVolume).result | select -ExpandProperty volume
+$env:ApiKey = "<Api_Key>"
+$env:ApiSecret = "<Api_Secret>"
+$Result = (.\kraken.ps1 -ApiKey $env:apikey -ApiSecret $env:ApiSecret -TradeVolume).result 
+$Result | Select-Object -ExpandProperty volume
 ```
 
 Other examples:
