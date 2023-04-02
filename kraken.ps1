@@ -127,16 +127,18 @@ function Test-EnvVariable {
 }
 
 
-if ($null -eq $ApiKey) {
-    Write-Output "[WARNING] No ApiKey."
-}
-
-if ($null -eq $ApiSecret) {
+if ($null -eq $ApiKey -and $null -eq $ApiSecret) {
+    Write-Output "[WARNING] No ApiKey and ApiSecret."
+    Show-Help
+} elseif ($ApiKey -and $null -eq $ApiSecret) {
+    <# Action when this condition is true #>
     Write-Output "[WARNING] No ApiSecret."
+    Show-Help
+} elseif ($null -eq $ApiKey -and $ApiSecret) {
+    <# Action when this condition is true #>
+    Write-Output "[WARNING] No ApiKey."
+    Show-Help
 }
-
-
-
 
 if ($help.IsPresent) {
     <# Action to perform if the condition is true #>
