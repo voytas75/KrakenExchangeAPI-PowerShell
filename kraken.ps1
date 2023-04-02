@@ -66,6 +66,8 @@ param (
     [int]$OHLCSince = 15,
     [int]$OHLCInterval = 15,
     [switch]$TradeVolume,
+    [switch]$Ticker,
+    [string]$TickerPair = "ETHUSD",
     [string]$ApiKey = $env:apiKey,
     [string]$ApiSecret = $env:ApiSecret,
     [switch]$Help
@@ -90,7 +92,7 @@ function Show-Help {
 
 function Test-EnvVariable {
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$Name
     )
 
@@ -112,11 +114,11 @@ if(-not (Test-EnvVariable -Name 'ApiSecret')) {
 }
  #>
 
-if($null -eq $ApiKey) {
+if ($null -eq $ApiKey) {
     Write-Output "[WARNING] No ApiKey."
 }
 
-if($null -eq $ApiSecret) {
+if ($null -eq $ApiSecret) {
     Write-Output "[WARNING] No ApiSecret."
 }
 
@@ -141,6 +143,7 @@ $endpoint = "https://api.kraken.com"
 $OHLCMethod = "/0/public/OHLC"
 $ServerTimeMethod = "/0/public/Time"
 $systemstatusMethod = "/0/public/SystemStatus"
+$TickerMethod = "/0/public/Ticker"
 # Private:
 $AccountBalanceMethod = "/0/private/Balance"
 $TradeBalanceMethod = "/0/private/TradeBalance"
@@ -157,6 +160,23 @@ $AccountBalanceUrl = $endpoint + $AccountBalanceMethod
 $ServerTimeUrl = $endpoint + $ServerTimeMethod
 $TradeBalanceurl = $endpoint + $TradeBalanceMethod
 $TradeVolumeUrl = $endpoint + $TradeVolumeMethod
+
+#Ticker
+if ($ticker.IsPresent) {
+    <# Action to perform if the condition is true #>
+    $TickerUrl = $endpoint + $TickerMethod
+    $TickerParams = [ordered]@{ 
+        "pair"  = "ETHUSD" 
+    }
+
+    $Tickerheaders = @{ 
+        "Content-Type" = "application/x-www-form-urlencoded; charset=utf-8"
+        "User-Agent"   = $useragent
+    }
+    $TickerResponse = Invoke-RestMethod -Uri $TickerUrl -Method Get -Headers $Tickerheaders -Body $TickerParams
+    return $TickerResponse
+
+}
 
 #TradeVolume
 if ($TradeVolume.IsPresent) {
