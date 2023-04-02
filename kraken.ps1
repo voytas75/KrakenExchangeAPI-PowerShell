@@ -86,10 +86,10 @@ param (
     [string]$TickerPair = "ETHUSD",
     
     [Parameter(Mandatory = $false)]
-    [string]$ApiKey = $(if (Test-Path env:\apiKey) { $env:apiKey }),
+    [string]$ApiKey,
     
     [Parameter(Mandatory = $false)]
-    [string]$ApiSecret = $(if (Test-Path env:\apiSecret) { $env:apiSecret }),
+    [string]$ApiSecret,
     
     [Parameter()]
     [Switch]$Help
@@ -126,26 +126,12 @@ function Test-EnvVariable {
     }
 }
 
-
-if ($null -eq $ApiKey -and $null -eq $ApiSecret) {
-    Write-Output "[WARNING] No ApiKey and ApiSecret."
-    Show-Help
-} elseif ($ApiKey -and $null -eq $ApiSecret) {
-    <# Action when this condition is true #>
-    Write-Output "[WARNING] No ApiSecret."
-    Show-Help
-} elseif ($null -eq $ApiKey -and $ApiSecret) {
-    <# Action when this condition is true #>
-    Write-Output "[WARNING] No ApiKey."
-    Show-Help
-}
-
 if ($help.IsPresent) {
     <# Action to perform if the condition is true #>
     Show-Help
 }
 
-. .\Set-APIKrakenSignature.ps1
+. $PSScriptRoot\Set-APIKrakenSignature.ps1
 
 #useragent
 $useragent = "myuseragent/1.0"
@@ -164,6 +150,18 @@ $AccountBalanceMethod = "/0/private/Balance"
 $TradeBalanceMethod = "/0/private/TradeBalance"
 $TradeVolumeMethod = "/0/private/TradeVolume"
 
+if ($null -eq $ApiKey -and $null -eq $ApiSecret -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
+    Write-Output "[WARNING] No ApiKey and ApiSecret."
+    Show-Help
+} elseif ((Test-Path env:\apiKey) -and $null -eq $ApiSecret -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
+    <# Action when this condition is true #>
+    Write-Output "[WARNING] No ApiSecret."
+    Show-Help
+} elseif ($null -eq $ApiKey -and (Test-Path env:\apiSecret) -and ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPresent)) {
+    <# Action when this condition is true #>
+    Write-Output "[WARNING] No ApiKey."
+    Show-Help
+}
 # Generate nonce
 $nonce = [Math]::Round((New-TimeSpan -Start "1/1/1970").TotalMilliseconds)
 # what is nonce: https://support.kraken.com/hc/en-us/articles/360000906023-What-is-a-nonce-
