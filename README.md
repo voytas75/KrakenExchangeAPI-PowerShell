@@ -28,7 +28,14 @@ Note that it is important to keep your API Secret secure and not share it with a
 
 ## Usage
 
-Here are some examples of how to use scripts:
+Here are some examples of how to use scripts. The most important is the REST API client for public and private environments:
+
+```powershell
+# Get trade volume using wrapper
+(.\kraken.ps1 -ApiKey $env:apikey -ApiSecret $env:ApiSecret -TradeVolume).result | select -ExpandProperty volume
+```
+
+Other examples:
 
 ```powershell
 # Get ticker information for BTC/USD
@@ -43,9 +50,6 @@ PS C:\> $payload.Add("pair", "XXBTZUSD")
 PS C:\> $payload.Add("price", "9000")
 PS C:\> $payload.Add("volume", "0.01")
 PS C:\> .\Set-APIKrakenSignature.ps1 -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
-
-# Get trade volume using wrapper
-(.\kraken.ps1 -ApiKey $env:apikey -ApiSecret $env:ApiSecret -TradeVolume).result | select -ExpandProperty volume
 ```
 
 ## Contributing
