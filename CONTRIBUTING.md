@@ -11,7 +11,7 @@ Thank you for your interest in contributing to KrakenExchangeAPI-PowerShell! Thi
 
 ## Coding Guidelines
 
-We follow the PSR-12 coding standard. Please ensure that your code adheres to this standard before submitting a pull request. Additionally, we expect all new code to be well-tested using Pester.
+We follow the PowerShell coding standard. Please ensure that your code adheres to this standard before submitting a pull request. Additionally, we expect all new code to be well-tested using Pester.
 
 ## Issue Reporting
 
