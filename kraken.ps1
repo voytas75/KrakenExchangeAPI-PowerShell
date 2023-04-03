@@ -147,7 +147,7 @@ if ($AccountBalance.IsPresent -or $TradeBalance.IsPresent -or $TradeVolume.IsPre
         Write-Warning "[WARNING] No ApiSecret."
         Show-Help
     }
-    elseif ($null -eq $ApiKey -and (Test-Path env:apiSecret) ) {
+    elseif (-not ($ApiKey) -and ($ApiSecret) ) {
         <# Action when this condition is true #>
         Write-Warning "[WARNING] No ApiKey."
         Show-Help
