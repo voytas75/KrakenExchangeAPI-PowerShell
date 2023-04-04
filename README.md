@@ -73,6 +73,10 @@ PS C:\> $payload.Add("volume", "0.01")
 PS C:\> .\Set-APIKrakenSignature.ps1 -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
 ```
 
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning.
+
 ## Contributing
 
 Contributions to this project are welcome and encouraged! If you notice a bug, have an idea for a new feature, or would like to contribute code, please open a GitHub issue or pull request.
