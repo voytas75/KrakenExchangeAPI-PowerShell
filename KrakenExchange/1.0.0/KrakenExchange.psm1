@@ -8,9 +8,6 @@ Foreach ($Function in $Functions) {
         Write-Error -Message "Failed to import function $($Function.FullName): $($_.Exception.Message)"
     }
 }
-# Update check
-New-Variable -Name ModuleVersion -Value "1.0.0"
-$url = "https://api.github.com/repos/voytas75/KrakenExchangeAPI-PowerShell/releases/latest"
 $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 # We switch to using TLS 1.2 because GitHub closes the connection if it uses 1.0 or 1.1
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
