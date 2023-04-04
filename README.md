@@ -6,9 +6,15 @@ This PowerShell scripts provides an easy way to interact with the Kraken Exchang
 
 Download scripts.
 
-### module KrakenExchange
+### Module KrakenExchange
 
-...waiting for version 1.0.0
+KrakenExchange 1.0.0 module has already arrived
+
+Installation:
+
+```powershell
+Install-Module -Name KrakenExchange
+```
 
 KrakenExchange is a PowerShell module that allows you to interact with the Kraken cryptocurrency exchange API. In this first version of the module, you can easily retrieve your account balance.
 
