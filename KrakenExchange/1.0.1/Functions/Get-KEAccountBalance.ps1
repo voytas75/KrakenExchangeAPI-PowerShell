@@ -7,13 +7,13 @@ function Get-KEAccountBalance {
     This function retrieves the account balance from Kraken API using the provided API key and API secret. It generates a nonce for authentication, sets the necessary headers, and makes a POST request to the Kraken API to fetch the account balance.
     
     .PARAMETER ApiKey
-    The API key for authentication with Kraken API. This parameter is mandatory.
+    The API key for authentication with Kraken API. 
     
     .PARAMETER ApiSecret
-    The API secret for authentication with Kraken API. This parameter is mandatory.
+    The API secret for authentication with Kraken API.
     
     .EXAMPLE
-    Get-KEAccountBalance -ApiKey "YourApiKey" -ApiSecret "YourApiSecret"
+    Get-KEAccountBalance -ApiKey "YourApiKey"
     
     Retrieves the account balance from Kraken API using the provided API key and API secret.
     #>
