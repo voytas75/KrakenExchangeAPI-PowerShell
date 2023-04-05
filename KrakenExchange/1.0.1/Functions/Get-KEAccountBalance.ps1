@@ -20,13 +20,27 @@ function Get-KEAccountBalance {
     
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$ApiKey,
+        [Parameter()]
+        [string]$ApiKey = $env:ApiKey,
 
-        [Parameter(Mandatory = $true)]
-        [string]$ApiSecret
+        [Parameter()]
+        [string]$ApiSecret = $env:ApiSecret
 
     )
+    
+        # Prompt for API Key and API Secret
+        if (-not $ApiKey) {
+            $ApiKey = Read-Host "Enter API Key"
+            $env:ApiKey = $ApiKey
+        }
+    
+        if (-not $ApiSecret) {
+            $ApiSecret = Read-Host "Enter API Secret" -AsSecureString | ConvertFrom-SecureString
+            $env:ApiSecret = $ApiSecret
+        }
+    
+        # Convert SecureString to plain text string
+        $ApiSecret = Convertto-SecureString -String $env:apisecret | ConvertFrom-SecureString -AsPlainText
     
     #useragent
     $useragent = "myuseragent/1.0"

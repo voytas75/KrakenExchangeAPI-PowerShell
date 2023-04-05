@@ -13,11 +13,19 @@ $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 # Get the name of the current module
 $ModuleName = "KrakenExchange"
-$reponame = "KrakenExchangeAPI-PowerShell"
+#$reponame = "KrakenExchangeAPI-PowerShell"
 # Get the installed version of the module
-$InstalledVersion = (Get-Module $ModuleName).Version
+$ModuleVersion = [version]"1.0.1"
 
-# Create a URL for the latest release of the module on GitHub
+$LatestModule = Find-Module -Name $ModuleName -Repository PSGallery
+
+if ($ModuleVersion -lt $LatestModule.Version) {
+    Write-Host "An update is available for $($ModuleName). Installed version: $($InstalledModule.Version). Latest version: $($LatestModule.Version)."
+} else {
+    Write-Host "The $($ModuleName) module is up-to-date."
+}
+
+<# # Create a URL for the latest release of the module on GitHub
 $GitHubAPIUrl = "https://api.github.com/repos/{USERNAME}/{REPO}/releases/latest"
 $GitHubAPIUrl = $GitHubAPIUrl -replace "{USERNAME}", "voytas75" -replace "{REPO}", $reponame
 
@@ -38,7 +46,7 @@ if ($InstalledVersion -lt $LatestVersion) {
 } else {
     Write-Host "You have the latest version of the $ModuleName module installed."
 }
-
+ #>
 [Net.ServicePointManager]::SecurityProtocol = $oldProtocol
 
 #region Best Practise
