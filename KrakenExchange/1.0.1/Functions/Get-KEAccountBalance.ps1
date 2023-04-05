@@ -43,7 +43,7 @@ function Get-KEAccountBalance {
         $ApiSecret = Convertto-SecureString -String $env:apisecret | ConvertFrom-SecureString -AsPlainText
     
     #useragent
-    $useragent = "myuseragent/1.0"
+    $UserAgent = "Powershell Module KrakenExchange/1.0"
     # Set API endpoint and version
     $endpoint = "https://api.kraken.com"
     $AccountBalanceMethod = "/0/private/Balance"
