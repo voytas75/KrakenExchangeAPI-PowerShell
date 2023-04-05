@@ -1,6 +1,6 @@
 # KrakenExchangeAPI-PowerShell
 
-This PowerShell scripts provides an easy way to interact with the Kraken Exchange API. It includes cmdlets for querying account information, getting ticker information for a specific currency pair, ...
+This PowerShell scripts and module [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) provides an easy way to interact with the Kraken Exchange API. It includes cmdlets for querying account information, getting ticker information for a specific currency pair, ...
 
 ## Installation
 
