@@ -1,4 +1,4 @@
-function Get-KETradableAssetPairs {
+function Get-KETradableAssetPair {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]

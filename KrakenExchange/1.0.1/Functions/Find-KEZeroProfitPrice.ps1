@@ -1,4 +1,4 @@
-function Find-KEZeroProfitPriceKraken {
+function Find-KEZeroProfitPrice {
 <#
 .SYNOPSIS
     Finds the zero-profit sell price for a given cryptocurrency on Kraken exchange.

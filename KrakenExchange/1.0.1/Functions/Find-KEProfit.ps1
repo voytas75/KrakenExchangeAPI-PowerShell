@@ -1,4 +1,4 @@
-function Find-KEProfitKraken {
+function Find-KEProfit {
 <#
 .SYNOPSIS
     Calculates the net profit from a trade on the Kraken cryptocurrency exchange.
