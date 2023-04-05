@@ -1,4 +1,23 @@
 function Get-KEAccountBalance {
+    <#
+    .SYNOPSIS
+    Get the account balance from Kraken API.
+    
+    .DESCRIPTION
+    This function retrieves the account balance from Kraken API using the provided API key and API secret. It generates a nonce for authentication, sets the necessary headers, and makes a POST request to the Kraken API to fetch the account balance.
+    
+    .PARAMETER ApiKey
+    The API key for authentication with Kraken API. This parameter is mandatory.
+    
+    .PARAMETER ApiSecret
+    The API secret for authentication with Kraken API. This parameter is mandatory.
+    
+    .EXAMPLE
+    Get-KEAccountBalance -ApiKey "YourApiKey" -ApiSecret "YourApiSecret"
+    
+    Retrieves the account balance from Kraken API using the provided API key and API secret.
+    #>
+    
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
