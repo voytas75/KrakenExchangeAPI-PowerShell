@@ -1,4 +1,4 @@
-function Get-TradableAssetPairs {
+function Get-KETradableAssetPairs {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -11,7 +11,7 @@ function Get-TradableAssetPairs {
     
     $TradableAssetPairsMethod = "/0/public/AssetPairs"
     $endpoint = "https://api.kraken.com"
-    $UserAgent = "PowershellScript/1.0"
+    $UserAgent = "Powershell Module KrakenExchange/1.0"
     $TradableAssetPairsUrl = $endpoint + $TradableAssetPairsMethod
 
     $TradableAssetPairsParams = [ordered]@{ 

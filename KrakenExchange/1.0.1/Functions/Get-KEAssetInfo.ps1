@@ -1,4 +1,4 @@
-function Get-AssetInfo {
+function Get-KEAssetInfo {
     <#
     .SYNOPSIS
     Retrieves information about a specific asset from the Kraken API.

@@ -1,4 +1,4 @@
-function Get-TickerInformation {
+function Get-KETickerInformation {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -7,7 +7,7 @@ function Get-TickerInformation {
     
     $TickerInformationMethod = "/0/public/Ticker"
     $endpoint = "https://api.kraken.com"
-    $UserAgent = "PowershellScript/1.0"
+    $UserAgent = "Powershell Module KrakenExchange/1.0"
     $TickerInformationUrl = $endpoint + $TickerInformationMethod
 
     $TickerInformationParams = [ordered]@{ 
