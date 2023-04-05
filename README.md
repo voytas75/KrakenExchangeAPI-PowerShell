@@ -8,7 +8,9 @@ Download scripts.
 
 ### Module KrakenExchange
 
-KrakenExchange 1.0.1 module has already arrived <https://www.powershellgallery.com/packages/KrakenExchange>
+KrakenExchange 1.0.1 module has already arrived
+
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange)
 
 Installation:
 
