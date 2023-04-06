@@ -1,8 +1,30 @@
+<#
+.SYNOPSIS
+Retrieves ticker information for a given trading pair using the KrakenExchange API.
+
+.DESCRIPTION
+The Get-KETickerInformation function retrieves ticker information for a given trading pair using the KrakenExchange API.
+For more information, see the Kraken API documentation: https://docs.kraken.com/rest/#tag/Market-Data/operation/getTickerInformation
+
+.PARAMETER Pair
+The trading pair to retrieve ticker information for, in the format "XBTUSD" (for Bitcoin to US dollar).
+
+.EXAMPLE
+PS C:\> Get-KETickerInformation -Pair "XBTUSD"
+
+Returns ticker information for the XBT/USD trading pair.
+
+.NOTES
+The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+Author: chatGPT, wnapierala [@] hotmail.com
+Date: 04.2023
+#>
 function Get-KETickerInformation {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$Pair
+        [Parameter()]
+        [ValidatePattern("[A-Z]{4}[A-Z]{3}")] # ensure pair is in the format "XXXXXX"
+        [string]$Pair = "XBTUSD"
     )
     
     $TickerInformationMethod = "/0/public/Ticker"
@@ -18,7 +40,13 @@ function Get-KETickerInformation {
         "User-Agent" = $UserAgent
     }
 
-    $TickerInformationResponse = Invoke-RestMethod -Uri $TickerInformationUrl -Method Get -Headers $TickerInformationHeaders -Body $TickerInformationParams
+    try {
+        $TickerInformationResponse = Invoke-RestMethod -Uri $TickerInformationUrl -Method Get -Headers $TickerInformationHeaders -Body $TickerInformationParams
+    }
+    catch {
+        Write-Error $_.Exception.Message
+        return
+    }
     
     return $TickerInformationResponse
 }

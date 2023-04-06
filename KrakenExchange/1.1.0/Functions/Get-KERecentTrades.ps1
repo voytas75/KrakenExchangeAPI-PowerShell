@@ -25,9 +25,10 @@ Date: 04.2023
     [CmdletBinding()]
     param ( 
         [Parameter()]
+        [ValidatePattern("[A-Z]{4}[A-Z]{3}")] # ensure pair is in the format "XXXXXX"
         [string]$Pair = "XBTUSD",
  
-        [datetime]$SinceDate
+        [datetime]$SinceDate = ((get-date).AddMinutes(-10))
     )
         
     $RecentTradesMethod = "/0/public/Trades"
