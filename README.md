@@ -46,7 +46,83 @@ To get a Kraken API Key and API Secret, you will need to follow these steps:
 
 Note that it is important to keep your API Secret secure and not share it with anyone. You will need both your API Key and API Secret to access your Kraken account via API.
 
-## Usage
+## KrakenExchange module usage
+
+Function `Get-KEAssetInfo`:
+
+```powershell
+PS C:\> Get-KEAssetInfo -Asset eth | convertto-json
+{
+  "error": [],
+  "result": {
+    "XETH": {
+      "aclass": "currency",
+      "altname": "ETH",
+      "decimals": 10,
+      "display_decimals": 5,
+      "collateral_value": 1.0,
+      "status": "enabled"
+    }
+  }
+}
+```
+
+Function `Get-KETicker` is using Websockets API and default `-Pair` is `BTC/USD`:
+
+```powershell
+PS C:\> Get-KETicker
+
+a : {27848.30000, 0, 0.10000000}
+b : {27844.30000, 0, 0.00192437}
+c : {27844.10000, 0.24874491}
+v : {1034.40223868, 4068.62533336}
+p : {27979.56830, 28142.75081}
+t : {14148, 42951}
+l : {27700.00000, 27700.00000}
+h : {28186.00000, 28742.70000}
+o : {28179.00000, 28496.40000}
+```
+[message ticker](https://docs.kraken.com/websockets/#message-ticker)
+
+Function `Get-KETickerInformation`:
+
+```powershell
+PS C:\> Get-KETickerInformation -Pair "BTC/USD" | ConvertTo-Json -Depth 3
+{
+  "error": [],
+  "result": {
+    "BTC/USD": {
+      "a": [
+        "27911.10000",
+        "16",
+        "16.000"
+      ],
+...
+      "o": "28179.00000"
+    }
+  }
+}
+```
+
+Function `Get-KETradableAssetPair`:
+
+```powershell
+Get-KETradableAssetPair -Pair "ethusd" -Info info | ConvertTo-Json -Depth 4
+{
+  "error": [],
+  "result": {
+    "XETHZUSD": {
+      "altname": "ETHUSD",
+      "wsname": "ETH/USD",
+...
+      "long_position_limit": 2700,
+      "short_position_limit": 1800
+    }
+  }
+}
+```
+
+## Scripts usage
 
 Here are some examples of how to use scripts. The most important is the REST API client for public and private environments:
 
