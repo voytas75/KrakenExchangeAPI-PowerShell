@@ -15,6 +15,10 @@ This example retrieves the current server time from the Kraken exchange and disp
 The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
 Author: wnapierala [@] hotmail.com, chatGPT
 Date: 04.2023
+
+.LINK
+For more information, see the Kraken API documentation:
+https://docs.kraken.com/rest/#tag/Market-Data/operation/getServerTime
 #>
     [CmdletBinding()]
     param (    )
