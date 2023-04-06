@@ -1,8 +1,8 @@
 function Get-TickerInformation {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$Pair
+        [Parameter()]
+        [string]$Pair = "XBTUSD"
     )
     
     $TickerInformationMethod = "/0/public/Ticker"
