@@ -13,13 +13,19 @@ function Get-KEAssetInfo {
     Get-AssetInfo -Asset "XBT"
     Retrieves information about the "XBT" asset (Bitcoin) from the Kraken API.
     
+    .LINK
+    For more information, see the Kraken API documentation:
+    https://docs.kraken.com/rest/#tag/Market-Data/operation/getAssetInfo
+
     .NOTES
-    This function requires internet access to connect to the Kraken API and retrieve asset information. Make sure your system has internet connectivity before using this function.
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+    Author: wnapierala [@] hotmail.com, chatGPT
+    Date: 04.2023
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$Asset
+        [Parameter()]
+        [string]$Asset = "BTC,ETH"
     )
     
     $AssetInfoMethod = "/0/public/Assets"
