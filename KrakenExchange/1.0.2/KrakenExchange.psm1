@@ -8,12 +8,15 @@ Foreach ($Function in $Functions) {
         Write-Error -Message "Failed to import function $($Function.FullName): $($_.Exception.Message)"
     }
 }
+
 $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
+
 # We switch to using TLS 1.2 because GitHub closes the connection if it uses 1.0 or 1.1
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 # Get the name of the current module
 $ModuleName = "KrakenExchange"
-#$reponame = "KrakenExchangeAPI-PowerShell"
+
 # Get the installed version of the module
 $ModuleVersion = [version]"1.0.2"
 
@@ -25,28 +28,6 @@ if ($ModuleVersion -lt $LatestModule.Version) {
     Write-Host "The $($ModuleName) module is up-to-date."
 }
 
-<# # Create a URL for the latest release of the module on GitHub
-$GitHubAPIUrl = "https://api.github.com/repos/{USERNAME}/{REPO}/releases/latest"
-$GitHubAPIUrl = $GitHubAPIUrl -replace "{USERNAME}", "voytas75" -replace "{REPO}", $reponame
-
-# Invoke the GitHub API to get information about the latest release
-$Response = Invoke-WebRequest -Uri $GitHubAPIUrl
-
-# Convert the JSON response to a PowerShell object
-$ReleaseInfo = ConvertFrom-Json $Response.Content
-
-# Get the version number of the latest release
-$LatestVersion = $ReleaseInfo.tag_name
-
-# Compare the installed version to the latest version
-$InstalledVersion
-$LatestVersion
-if ($InstalledVersion -lt $LatestVersion) {
-    Write-Host "A new version of the $ModuleName module is available. Latest version: $LatestVersion"
-} else {
-    Write-Host "You have the latest version of the $ModuleName module installed."
-}
- #>
 [Net.ServicePointManager]::SecurityProtocol = $oldProtocol
 
 #region Best Practise
