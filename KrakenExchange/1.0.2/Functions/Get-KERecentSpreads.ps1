@@ -1,14 +1,26 @@
-
 function Get-KERecentSpreads {
     <#
-
-.NOTES
-The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
-For more information, see the Kraken API documentation: 
-https://docs.kraken.com/rest/#tag/Market-Data/operation/getRecentSpreads
-Author: wnapierala [@] hotmail.com, chatGPT
-Date: 04.2023
-#>
+    .SYNOPSIS
+    Retrieves recent spreads for a specified trading pair from the Kraken API.
+    
+    .DESCRIPTION
+    The Get-KERecentSpreads function uses the Kraken API to retrieve recent spreads for a specified trading pair.
+    
+    .PARAMETER Pair
+    The trading pair for which to retrieve recent spreads. Default value is XBTUSD.
+    
+    .NOTES
+    Author: wnapierala [@] hotmail.com, chatGPT
+    Date: 04.2023
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+    For more information, see the Kraken API documentation: 
+    https://docs.kraken.com/rest/#tag/Market-Data/operation/getRecentSpreads
+    
+    .EXAMPLE
+    PS C:\> Get-KERecentSpreads -Pair "ETHUSD"
+    
+    This example retrieves the recent spreads for the ETHUSD trading pair.
+    #>
     [CmdletBinding()]
     param ( 
         [Parameter()]
