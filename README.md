@@ -82,6 +82,7 @@ l : {27700.00000, 27700.00000}
 h : {28186.00000, 28742.70000}
 o : {28179.00000, 28496.40000}
 ```
+
 [message ticker](https://docs.kraken.com/websockets/#message-ticker)
 
 Function `Get-KETickerInformation`:
