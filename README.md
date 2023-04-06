@@ -77,11 +77,11 @@ o : {28179.00000, 28496.40000}
 Function `Get-KETickerInformation`:
 
 ```powershell
-PS C:\> Get-KETickerInformation -Pair "BTC/USD" | ConvertTo-Json -Depth 3
+PS C:\> Get-KETickerInformation -Pair "BTCUSD" | ConvertTo-Json -Depth 3
 {
   "error": [],
   "result": {
-    "BTC/USD": {
+    "XXBTZUSD": {
       "a": [
         "27911.10000",
 ...
