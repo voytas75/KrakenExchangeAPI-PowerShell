@@ -1,4 +1,4 @@
-function Get-OHLCData {
+function Get-KEOHLCData {
 <#
 .SYNOPSIS
 Gets OHLC data for a given trading pair from the Kraken exchange.
