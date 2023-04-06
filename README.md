@@ -4,7 +4,7 @@ This PowerShell scripts and module [KrakenExchange](https://www.powershellgaller
 
 ## Installation
 
-Download scripts.
+Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) module or download scripts from [releases](https://github.com/voytas75/KrakenExchangeAPI-PowerShell/releases).
 
 ### Module KrakenExchange
 
