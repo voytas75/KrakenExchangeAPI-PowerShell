@@ -18,7 +18,7 @@ $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 $ModuleName = "KrakenExchange"
 
 # Get the installed version of the module
-$ModuleVersion = [version]"1.0.2"
+$ModuleVersion = [version]"1.1.0"
 
 $LatestModule = Find-Module -Name $ModuleName -Repository PSGallery
 
