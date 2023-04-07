@@ -32,6 +32,7 @@ function Set-KESignature {
     PS C:\> Set-APIKrakenSignature -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
 
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>
