@@ -8,9 +8,9 @@ Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchan
 
 ### Module KrakenExchange
 
-KrakenExchange 1.1.0 module has already arrived
+KrakenExchange 2.0.0 module has already arrived
 
-[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/1.1.0)
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/2.0.0)
 
 Installation:
 
@@ -47,6 +47,18 @@ To get a Kraken API Key and API Secret, you will need to follow these steps:
 Note that it is important to keep your API Secret secure and not share it with anyone. You will need both your API Key and API Secret to access your Kraken account via API.
 
 ## KrakenExchange module usage
+
+Function `Connect-KExchange`, create connection to Kraken API to use private endpoints. Asks about API Key and API Secret (see above [`ApiKey and ApiSecret`](https://github.com/voytas75/KrakenExchangeAPI-PowerShell/tree/main#apikey-and-apisecret)):
+
+```powershell
+Connect-KExchange
+```
+
+Function `Disconnect-KExchange`, deleting user's data:
+
+```powershell
+Disconnect-KExchange
+```
 
 Function `Get-KEAssetInfo`:
 
