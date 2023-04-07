@@ -31,7 +31,7 @@ function Connect-KrakenExchange {
         [string]$ApiSecret,
 
         [Parameter(Mandatory = $false, HelpMessage = "Whether to generate a websocket token using the Get-KEWebsocketsToken function and save it to the `$env:KE_WEBSOCKET_TOKEN environment variable.")]
-        [bool]$GenerateWebsocketToken = $false
+        [bool]$GenerateWebsocketToken = $true
     )
 
     if (-not $ApiKey -or -not $ApiSecret) {
@@ -41,31 +41,26 @@ function Connect-KrakenExchange {
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
     } else {
         $ApiSecretEncoded = $ApiSecret
+        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
     }
 
-    [Environment]::SetEnvironmentVariable("KE_API_KEY", $ApiKey, "User")
-    [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecret, "User")
-
-    #$ApiSecretPlainText = $ApiSecretEncoded | ConvertTo-SecureString | ConvertFrom-SecureString -AsPlainText
-
-    $headers = @{
-        'API-Key' = $ApiKey
+<#     $headers = @{
+        'API-Key' = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
     }
-
+ #>
     if ($GenerateWebsocketToken) {
-        $token = Get-KEWebsocketsToken -ApiKey $ApiKey -ApiSecret $ApiSecretEncoded
+        $token = Get-KEWebsocketsToken -ApiKey ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')) -ApiSecret $ApiSecretEncoded
         [Environment]::SetEnvironmentVariable("KE_WEBSOCKET_TOKEN", $token.result.token, "User")
-        Write-Host "Websocket token generated and saved to environment variable KE_WEBSOCKET_TOKEN."
+        #Write-Host "Websocket token generated and saved to environment variable KE_WEBSOCKET_TOKEN."
     }
 
     $API = @{
-        BaseUri   = 'https://api.kraken.com/0/'
-        ApiKey    = $ApiKey
-        ApiSecret = $ApiSecretEncoded
-        Headers   = $headers
+#        BaseUri   = 'https://api.kraken.com/0/'
+        ApiKey    = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
+        ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET','user'))
+#        Headers   = $headers
         WebsocketsToken = [Environment]::GetEnvironmentVariable("KE_WEBSOCKET_TOKEN","User")
     }
-
 
     return $API
 }

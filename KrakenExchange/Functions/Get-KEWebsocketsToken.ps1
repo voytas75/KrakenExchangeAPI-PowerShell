@@ -38,8 +38,7 @@ function Get-KEWebsocketsToken {
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
     }
     else {
-        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecret, "User")
-        $ApiSecretEncoded = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
+        $ApiSecretEncoded = $ApiSecret
     }
 
     $UserAgent = "Powershell Module KrakenExchange/1.0"
