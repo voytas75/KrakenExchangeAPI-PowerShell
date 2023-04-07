@@ -32,6 +32,7 @@ function Find-KEProfit {
     Returns the net profit from selling 2 BTC for $50,000 on Kraken after fees are deducted.
 
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>

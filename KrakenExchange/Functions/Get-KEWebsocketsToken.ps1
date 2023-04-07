@@ -14,6 +14,10 @@ function Get-KEWebsocketsToken {
     .EXAMPLE
         PS> Get-KEWebsocketsToken -ApiKey "your-api-key" -ApiSecret "your-api-secret"
         Generates a WebSockets token using the provided API Key and API Secret.
+    .NOTES
+        The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+        Author: wnapierala [@] hotmail.com, chatGPT
+        Date: 04.2023
     #>
     [CmdletBinding()]
     param (

@@ -16,8 +16,12 @@ function Get-KEAccountBalance {
     Get-KEAccountBalance -ApiKey "YourApiKey"
     
     Retrieves the account balance from Kraken API using the provided API key and API secret.
-    #>
     
+    .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+    Author: wnapierala [@] hotmail.com, chatGPT
+    Date: 04.2023
+    #>    
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -29,7 +33,7 @@ function Get-KEAccountBalance {
     )
     
     if (-not $ApiSecret) {
-        Connect-KrakenExchange
+        Connect-KExchange
 <#         $ApiSecret = Read-Host "Enter API Secret" -AsSecureString
         $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
