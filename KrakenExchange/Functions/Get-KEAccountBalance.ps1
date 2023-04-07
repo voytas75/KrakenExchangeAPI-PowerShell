@@ -21,27 +21,28 @@ function Get-KEAccountBalance {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [string]$ApiKey = $env:ApiKey,
+        [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY','user')),
 
         [Parameter()]
-        [string]$ApiSecret = $env:ApiSecret
+        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET','user'))
 
     )
     
-        # Prompt for API Key and API Secret
-        if (-not $ApiKey) {
-            $ApiKey = Read-Host "Enter API Key"
-            $env:ApiKey = $ApiKey
-        }
-    
-        if (-not $ApiSecret) {
-            $ApiSecret = Read-Host "Enter API Secret" -AsSecureString | ConvertFrom-SecureString
-            $env:ApiSecret = $ApiSecret
-        }
+    if (-not $ApiSecret) {
+        $ApiSecret = Read-Host "Enter API Secret" -AsSecureString
+        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+    }
+    else {
+        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecret, "User")
+        $ApiSecretEncoded = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
+    }
     
         # Convert SecureString to plain text string
         $ApiSecret = Convertto-SecureString -String $env:apisecret | ConvertFrom-SecureString -AsPlainText
-    
+        $ApiSecretPtr = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($ApiSecret)
+        $ApiSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($ApiSecretPtr)
+
     #useragent
     $UserAgent = "Powershell Module KrakenExchange/1.0"
     # Set API endpoint and version
@@ -57,7 +58,7 @@ function Get-KEAccountBalance {
         "nonce" = $nonce
     }
 
-    $signature = Set-KESignature -Payload $AccountBalanceParam -URI $AccountBalanceMethod -api_secret $apiSecret
+    $signature = Set-KESignature -Payload $AccountBalanceParam -URI $AccountBalanceMethod -api_secret $ApiSecretEncoded
 
     $AccountBalanceHeaders = @{ 
         "API-Key"    = $apiKey; 
