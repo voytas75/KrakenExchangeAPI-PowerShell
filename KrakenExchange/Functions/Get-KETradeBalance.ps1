@@ -12,14 +12,18 @@ function Get-KETradeBalance {
     .PARAMETER ApiSecret
     The encoded API secret for the Kraken exchange account.
     
+    .LINK
+    For more information, see the Kraken API documentation:
+    https://docs.kraken.com/rest/#tag/User-Data/operation/getTradeBalance
+
+    .EXAMPLE
+    PS C:\> Get-KETradeBalance -ApiKey "MY_API_KEY" -ApiSecret "encoded_MY_API_SECRET"
+    Retrieves the trade balance for the Kraken exchange account associated with the specified API key and encoded secret.
+    
     .NOTES
     The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 04.2023
-    
-    .EXAMPLE
-    PS C:\> Get-KETradeBalance -ApiKey "MY_API_KEY" -ApiSecret "encoded_MY_API_SECRET"
-    Retrieves the trade balance for the Kraken exchange account associated with the specified API key and encoded secret.
     #>    
     [CmdletBinding()]
     param (
