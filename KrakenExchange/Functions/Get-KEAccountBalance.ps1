@@ -10,7 +10,7 @@ function Get-KEAccountBalance {
     The API key for authentication with Kraken API. 
     
     .PARAMETER ApiSecret
-    The API secret for authentication with Kraken API.
+    The encoded API secret for authentication with Kraken API.
     
     .EXAMPLE
     Get-KEAccountBalance -ApiKey "YourApiKey"
