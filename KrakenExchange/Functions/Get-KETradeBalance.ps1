@@ -72,6 +72,9 @@ function Get-KETradeBalance {
     # Send API request and retrieve response
     $TradeBalanceResponse = Invoke-RestMethod -Uri $TradeBalanceUrl -Method Post -body $TradeBalanceParam -Headers $TradeBalanceHeaders
     
+    if ($TradeBalanceResponse.error -contains "EAPI:Invalid key") {
+        Connect-KExchange
+    }
     # Return the response
     return $TradeBalanceResponse
 }
