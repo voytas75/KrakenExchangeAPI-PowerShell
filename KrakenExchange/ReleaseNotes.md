@@ -18,11 +18,18 @@
 
 ### Added
 
-- new functions.
+- added `Get-KETradeVolume` function to retrieve trading volume information for a specified asset pair.
+- added `Get-KEOHLCData` function to retrieve Open, High, Low, and Close data for a specified asset pair.
+- added `Get-KEOrderBook` to retrieve the order book for a given trading pair.
+- added `Get-KERecentSpreads` to retrieve recent spreads for a specified trading pair.
+- added `Get-KERecentTrades` to retrieve recent trades for a specified trading pair.
 
 ### Changed
 
 - secure api key and secret,
+- fixed issue with `Get-KETickerInformation` function not returning correct ticker information for certain asset pairs,
+- updated help documentation for all functions to provide additional information and usage examples,
+- refactored code for improved performance and maintainability,
 - minor changes.
 
 ## 1.0.1 - 2023.04.04
