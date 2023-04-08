@@ -37,6 +37,7 @@ function Connect-KExchange {
 
     if (-not $ApiKey -or -not $ApiSecret) {
         $ApiKey = Read-Host "API Key"
+        [Environment]::SetEnvironmentVariable("KE_API_KEY", $ApiKey, "User")
         [securestring]$ApiSecret = Read-Host "API Secret" -AsSecureString 
         [string]$ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
