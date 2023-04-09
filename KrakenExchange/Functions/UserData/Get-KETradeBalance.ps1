@@ -28,18 +28,19 @@ function Get-KETradeBalance {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]
-        [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
+        [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', "User")),
 
         [Parameter(Mandatory = $false)]
-        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
+        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
 
     )
 
     # Check if ApiSecret is provided or needs to be retrieved
     if (-not $ApiSecret) {
+        Disconnect-KExchange
         Connect-KExchange
-        $ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
-        $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
+        $ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))
+        $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
     }
     else {
         $ApiSecretEncoded = $ApiSecret
@@ -60,6 +61,9 @@ function Get-KETradeBalance {
     $TradeBalanceParam = [ordered]@{
         "nonce" = $nonce
     }
+
+    Write-Debug "APIKey: $([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))"
+    Write-Debug "APISecret: $([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))"
 
     # Generate signature for API request
     $signature = Set-KESignature -Payload $TradeBalanceParam -URI $TradeBalanceMethod -ApiSecret $ApiSecretEncoded

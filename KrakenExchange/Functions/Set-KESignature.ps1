@@ -46,10 +46,11 @@ function Set-KESignature {
         [string]$URI,
 
         [Parameter(Mandatory = $false, HelpMessage = "The API secret for the Kraken account, as a securestring.")]
-        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET','user'))
+        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET',"User"))
     )
 
-    Write-Debug "APISecret: ${ApiSecret}"
+    Write-Debug "APIKey: $([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))"
+    Write-Debug "APISecret: $([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))"
 
     if (-not $ApiSecret) {
         [securestring]$ApiSecret = Read-Host "API Secret" -AsSecureString 
