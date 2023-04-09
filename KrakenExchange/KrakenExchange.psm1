@@ -1,5 +1,5 @@
 # Import all functions in the Functions directory
-$Functions  = @( Get-ChildItem -Path $PSScriptRoot\Functions\*.ps1 -ErrorAction SilentlyContinue )
+$Functions  = @( Get-ChildItem -Path $PSScriptRoot\Functions\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 Foreach ($Function in $Functions) {
     Try {
         . $Function.fullname
