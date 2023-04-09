@@ -2,6 +2,7 @@ function Get-TradableAssetPairs {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidatePattern("[A-Z]")]
         [string]$Pair,
 
         [Parameter()]

@@ -29,6 +29,7 @@ function Get-KEOrderBook {
     [CmdletBinding()]
     param (
         [Parameter()]
+        [ValidatePattern("[A-Z]")]
         [string]$Pair = "XBTUSD",
     
         [Parameter()]

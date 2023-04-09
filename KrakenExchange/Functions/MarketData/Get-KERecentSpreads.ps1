@@ -24,6 +24,7 @@ function Get-KERecentSpreads {
     [CmdletBinding()]
     param ( 
         [Parameter()]
+        [ValidatePattern("[A-Z]")]
         [string]$Pair = "XBTUSD"
     )
         

@@ -33,7 +33,7 @@ function Get-KETradeVolume {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [ValidatePattern("[A-Z]{3}[A-Z]{3}")] # ensure pair is in the format "XXXXXX"
+        [ValidatePattern("[A-Z]")]
         [string]$Pair = "XBTUSD",
 
         [Parameter(Mandatory = $false)]

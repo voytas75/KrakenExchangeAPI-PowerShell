@@ -28,6 +28,7 @@ https://docs.kraken.com/rest/#tag/Market-Data/operation/getOHLCData
     [CmdletBinding()]
     param (
         [Parameter()]
+        [ValidatePattern("[A-Z]")]
         [string]$Pair = "XBTUSD",
 
         [Parameter()]
