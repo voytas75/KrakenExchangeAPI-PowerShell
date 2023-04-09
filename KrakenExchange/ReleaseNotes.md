@@ -1,6 +1,6 @@
 # KrakenExchange powershell module - release notes
 
-## 2.0.0 - 2023.04.08
+## 2.0.0 - 2023.04.09
 
 ### Added
 
@@ -8,6 +8,7 @@
 - new function `Disconnect-KExchange`
 - new function `Get-KETradeBalance`
 - new function `Get-KEOpenOrders`
+- new function `Get-KETradeVolume`
 
 ### Changed
 
