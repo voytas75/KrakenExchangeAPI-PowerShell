@@ -1,5 +1,7 @@
 # KrakenExchangeAPI-PowerShell
 
+Note: The module and scripts are not affiliated with Kraken or any other cryptocurrency exchange, and use of is at your own risk.
+
 This PowerShell scripts and module [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) provides an easy way to interact with the Kraken Exchange API. It includes cmdlets for querying account information, getting ticker information for a specific currency pair, ...
 
 ## Installation
