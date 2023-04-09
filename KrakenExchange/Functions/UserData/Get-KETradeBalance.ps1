@@ -40,7 +40,7 @@ function Get-KETradeBalance {
         Disconnect-KExchange
         Connect-KExchange
         $ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))
-        $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
+        $ApiSecretEncoded = $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
     }
     else {
         $ApiSecretEncoded = $ApiSecret

@@ -26,7 +26,10 @@ function Get-KEOpenOrders {
 
     # Check if ApiSecret is provided or needs to be retrieved
     if (-not $ApiSecret) {
+        Disconnect-KExchange
         Connect-KExchange
+        $ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))
+        $ApiSecretEncoded = $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
     }
     else {
         $ApiSecretEncoded = $ApiSecret
