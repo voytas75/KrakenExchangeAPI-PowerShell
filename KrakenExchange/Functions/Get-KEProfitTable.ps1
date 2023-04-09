@@ -87,7 +87,7 @@ function Get-KEProfitTable {
     for ($p = -1; $p -le 1; $p += 0.1) {
         $percentage = $p / 100.0
         $new_crypto_price = $current_crypto_price * (1 + $percentage)
-        $profit = Find-KEProfitKraken -crypto $Crypto -amount $Amount -buyfee $BuyFee -sellfee $SellFee -SellPrice $new_crypto_price -BuyPrice $current_crypto_price
+        $profit = Find-KEProfit -crypto $Crypto -amount $Amount -buyfee $BuyFee -sellfee $SellFee -SellPrice $new_crypto_price -BuyPrice $current_crypto_price
         $output = [PSCustomObject]@{
             PriceChange = $p
             Price       = $new_crypto_price
