@@ -33,6 +33,7 @@ function Get-KETradableAssetPair {
     [CmdletBinding()]
     param (
         [Parameter()]
+        [ValidatePattern("[A-Z]")]
         [string]$Pair = "XBTUSD",
 
         [Parameter()]

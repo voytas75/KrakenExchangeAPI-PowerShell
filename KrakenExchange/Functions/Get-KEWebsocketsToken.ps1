@@ -37,8 +37,8 @@ function Get-KEWebsocketsToken {
     [Environment]::SetEnvironmentVariable("KE_API_KEY", $ApiKey, "User")
 
     if (-not $ApiSecret) {
-        $ApiSecret = Read-Host "Enter API Secret" -AsSecureString
-        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+        [securestring]$ApiSecret = Read-Host "Enter API Secret" -AsSecureString
+        [string]$ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
     }
     else {
