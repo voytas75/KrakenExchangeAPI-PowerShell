@@ -92,8 +92,8 @@ $Crypto = $Crypto.ToUpper()
         # Calculate profit and target profit
         $profit = Find-KEProfit -Crypto $Crypto -Amount $Amount -BuyFee $BuyFee -SellFee $SellFee -SellPrice $newSellPrice -buyprice $CurrentCryptPrice
         # Check if accuracy condition is met
-        if ($profit -gt 0) {
-            Write-Verbose "Crypto: ${crypto}, buy price: ${CurrentCryptPrice} USD, zero profit price: $($newSellPrice.ToString('N2')) USD, profit: ${profit}"
+        if ($profit.profitNet -gt 0) {
+            Write-Verbose "Crypto: ${crypto}, buy price: ${CurrentCryptPrice} USD, zero profit price: $($newSellPrice.ToString('N2')) USD, profit: $($profit.profitNet)"
             return $newSellPrice
         }
 
