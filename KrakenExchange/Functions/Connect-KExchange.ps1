@@ -35,35 +35,48 @@ function Connect-KExchange {
         [bool]$GenerateWebsocketToken = $true
     )
 
-    if (-not $ApiKey -or -not $ApiSecret) {
-        $ApiKey = Read-Host "API Key"
-        [Environment]::SetEnvironmentVariable("KE_API_KEY", $ApiKey, "User")
-        [securestring]$ApiSecret = Read-Host "API Secret" -AsSecureString 
-        [string]$ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
-        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+    try {
+        if (-not $ApiKey -or -not $ApiSecret) {
+            $ApiKey = Read-Host "API Key"
+            [Environment]::SetEnvironmentVariable("KE_API_KEY", $ApiKey, "User")
+            [securestring]$ApiSecret = Read-Host "API Secret" -AsSecureString 
+            [string]$ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+            [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+        }
+        else {
+            $ApiSecretEncoded = $ApiSecret
+            [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+        }
+    
+        if ($GenerateWebsocketToken) {
+            $token = Get-KEWebsocketsToken -ApiKey ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')) -ApiSecret $ApiSecretEncoded
+            [Environment]::SetEnvironmentVariable("KE_WEBSOCKET_TOKEN", $token.result.token, "User")
+            #Write-Host "Websocket token generated and saved to environment variable KE_WEBSOCKET_TOKEN."
+        }
+    
+        if ($DebugPreference -eq "Continue") {
+            $headers = @{
+                'API-Key' = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
+            }
+    
+            $API = @{
+                BaseUri         = 'https://api.kraken.com/0/'
+                ApiKey          = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
+                ApiSecret       = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
+                Headers         = $headers
+                WebsocketsToken = [Environment]::GetEnvironmentVariable("KE_WEBSOCKET_TOKEN", "User")
+            }
+    
+            $debugmessage = $API | Out-String
+            Write-Debug "API Data: ${debugmessage}"
+        }
+    
+        return $true
+    
     }
-    else {
-        $ApiSecretEncoded = $ApiSecret
-        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
-    }
+    catch {
 
-    <#     $headers = @{
-        'API-Key' = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
+        return $_.error
+        
     }
- #>
-    if ($GenerateWebsocketToken) {
-        $token = Get-KEWebsocketsToken -ApiKey ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')) -ApiSecret $ApiSecretEncoded
-        [Environment]::SetEnvironmentVariable("KE_WEBSOCKET_TOKEN", $token.result.token, "User")
-        #Write-Host "Websocket token generated and saved to environment variable KE_WEBSOCKET_TOKEN."
-    }
-
-    $API = @{
-        #        BaseUri   = 'https://api.kraken.com/0/'
-        ApiKey          = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
-        ApiSecret       = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
-        #        Headers   = $headers
-        WebsocketsToken = [Environment]::GetEnvironmentVariable("KE_WEBSOCKET_TOKEN", "User")
-    }
-
-    return $API
 }
