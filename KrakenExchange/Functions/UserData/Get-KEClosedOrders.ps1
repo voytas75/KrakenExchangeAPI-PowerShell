@@ -107,8 +107,7 @@ function Get-KEClosedOrders {
         else {
             $EndDate_unixTimestamp = [Math]::Round((New-TimeSpan -Start "1/1/1970").TotalSeconds)
         }
-    
-    
+        
         # Define parameters for API request
         $ClosedOrdersParam = [ordered]@{
             "nonce"     = $nonce
