@@ -24,6 +24,12 @@ function Get-KEOpenOrders {
 
     )
 
+    Write-Debug $MyInvocation.ScriptName
+    Write-Debug "APIKey env.: $([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))"
+    Write-Debug "APIKey arg.: ${ApiKey}"
+    Write-Debug "APISecret env.: $([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))"
+    Write-Debug "APISecret arg.: ${ApiSecret}"
+
     # Check if ApiSecret is provided or needs to be retrieved
     if (-not $ApiSecret) {
         Disconnect-KExchange

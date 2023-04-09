@@ -32,6 +32,12 @@ function Get-KEAccountBalance {
 
     )
     
+    Write-Debug $MyInvocation.ScriptName
+    Write-Debug "APIKey env.: $([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))"
+    Write-Debug "APIKey arg.: ${ApiKey}"
+    Write-Debug "APISecret env.: $([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))"
+    Write-Debug "APISecret arg.: ${ApiSecret}"
+
     if (-not $ApiSecret) {
         Disconnect-KExchange
         Connect-KExchange
