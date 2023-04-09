@@ -76,7 +76,7 @@ function Connect-KExchange {
     }
     catch {
 
-        return $_.error
-        
+        return $_.exception.message
+
     }
 }
