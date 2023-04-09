@@ -84,15 +84,17 @@ function Find-KEProfit {
     $profitNet = $profitGross - $costs
     Write-Debug "Crypto: ${Crypto}, Currency: ${Currency}, Buy price: ${buyPrice}, Sell price: ${SellPrice}, Buy fee: ${BuyFee}, Sell fee: ${SellFee}"
     $KEProfit_object = [PSCustomObject]@{
-        Crypto       = ${Crypto}
-        Currency     = ${Currency}
-        "Buy price"  = ${buyPrice}
-        "Sell price" = ${SellPrice}
-        Amount       = ${Amount}
-        "Buy fee"    = ${BuyFee}
-        "Sell fee"   = ${SellFee}
-        profitGross  = ${profitGross}
-        profitNet    = ${profitNet}
+        "Crypto"       = ${Crypto}
+        "Currency"     = ${Currency}
+        "Buy price"    = ${buyPrice}
+        "Sell price"   = ${SellPrice}
+        "Amount"       = ${Amount}
+        "Buy fee (%)"  = ${BuyFee}
+        "Buy fee"      = ${buy_cost_fee}
+        "Sell fee (%)" = ${SellFee}
+        "Sell fee"     = ${sell_cost_fee}
+        "profitGross"  = ${profitGross}
+        "profitNet"    = ${profitNet}
     }
     return $KEProfit_object
 }

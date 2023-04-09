@@ -1,14 +1,15 @@
 # KrakenExchange powershell module - release notes
 
-## 2.1.0 - 2023.04.
+## 2.1.0 - 2023.04.09
 
 ### Added
 
--
+- param alias in `Find-KEZeroProfitPrice`
+- new function `Get-KEClosedOrders`
 
 ### Changed
 
--
+- output of `Find-KEProfit`
 
 ## 2.0.0 - 2023.04.09
 

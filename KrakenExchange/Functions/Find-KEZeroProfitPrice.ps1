@@ -67,6 +67,7 @@ function Find-KEZeroProfitPrice {
         [double]$StepRange = 0.001,
 
         [Parameter()]
+        [Alias("BuyPrice", "Price")]
         [ValidateRange(0, [double]::MaxValue)]
         [double]$CurrentCryptPrice = (Invoke-RestMethod -Method GET -Uri "https://api.kraken.com/0/public/Ticker?pair=${Crypto}${Currency}").result."X${Crypto}Z${Currency}".'c'[0]
     )
