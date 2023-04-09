@@ -18,16 +18,17 @@ $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 $ModuleName = "KrakenExchange"
 
 # Get the installed version of the module
-$ModuleVersion = [version]"1.1.0"
+$ModuleVersion = [version]"2.0.0"
 
 $LatestModule = Find-Module -Name $ModuleName -Repository PSGallery
 
 if ($ModuleVersion -lt $LatestModule.Version) {
     Write-Host "An update is available for $($ModuleName). Installed version: $($InstalledModule.Version). Latest version: $($LatestModule.Version)."
-} else {
+} 
+<# else {
     Write-Host "The $($ModuleName) module is up-to-date."
 }
-
+ #>
 [Net.ServicePointManager]::SecurityProtocol = $oldProtocol
 
 #region Best Practise

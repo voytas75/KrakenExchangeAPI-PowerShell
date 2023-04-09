@@ -16,32 +16,32 @@ function Get-KEAccountBalance {
     Get-KEAccountBalance -ApiKey "YourApiKey"
     
     Retrieves the account balance from Kraken API using the provided API key and API secret.
-    #>
     
+    .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+    Author: wnapierala [@] hotmail.com, chatGPT
+    Date: 04.2023
+    #>    
     [CmdletBinding()]
     param (
         [Parameter()]
-        [string]$ApiKey = $env:ApiKey,
+        [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
 
         [Parameter()]
-        [string]$ApiSecret = $env:ApiSecret
+        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
 
     )
     
-        # Prompt for API Key and API Secret
-        if (-not $ApiKey) {
-            $ApiKey = Read-Host "Enter API Key"
-            $env:ApiKey = $ApiKey
-        }
-    
-        if (-not $ApiSecret) {
-            $ApiSecret = Read-Host "Enter API Secret" -AsSecureString | ConvertFrom-SecureString
-            $env:ApiSecret = $ApiSecret
-        }
-    
-        # Convert SecureString to plain text string
-        $ApiSecret = Convertto-SecureString -String $env:apisecret | ConvertFrom-SecureString -AsPlainText
-    
+    if (-not $ApiSecret) {
+        Connect-KExchange
+<#         $ApiSecret = Read-Host "Enter API Secret" -AsSecureString
+        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+ #>    }
+    else {
+        $ApiSecretEncoded = $ApiSecret
+    }
+
     #useragent
     $UserAgent = "Powershell Module KrakenExchange/1.0"
     # Set API endpoint and version
@@ -57,7 +57,7 @@ function Get-KEAccountBalance {
         "nonce" = $nonce
     }
 
-    $signature = Set-KESignature -Payload $AccountBalanceParam -URI $AccountBalanceMethod -api_secret $apiSecret
+    $signature = Set-KESignature -Payload $AccountBalanceParam -URI $AccountBalanceMethod -ApiSecret $ApiSecretEncoded
 
     $AccountBalanceHeaders = @{ 
         "API-Key"    = $apiKey; 

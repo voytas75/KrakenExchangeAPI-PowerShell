@@ -1,4 +1,20 @@
 function Write-KEModuleLog {
+    <#
+    .SYNOPSIS
+        Writes a log message to a file for a specific module.
+    .DESCRIPTION
+        The Write-KEModuleLog function creates a log file for a specific module and writes a message to that file.
+    .PARAMETER ModuleName
+        The name of the module for which to create a log file.
+    .PARAMETER Message
+        The log message to write to the file.
+    .EXAMPLE
+        Write-KEModuleLog -ModuleName "MyModule" -Message "An error occurred in MyModule."
+    .NOTES
+        The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
+        Author: wnapierala [@] hotmail.com, chatGPT
+        Date: 04.2023
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]

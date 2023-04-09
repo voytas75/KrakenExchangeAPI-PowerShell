@@ -39,7 +39,7 @@ function Get-KETicker {
     .\krakenticker.ps1 -Pair
     .\krakenticker.ps1 -Pair "ETH/USD"
     .NOTES
-    This script requires PowerShell 7.x or higher to run.
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [at] hotmail.com, chatGPT
     Created: 03.2023
     #>

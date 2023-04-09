@@ -32,6 +32,7 @@ function Set-KESignature {
     PS C:\> Set-APIKrakenSignature -Payload $payload -URI "/0/private/AddOrder" -api_secret "KrakenAPIsecret"
 
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>
@@ -44,9 +45,19 @@ function Set-KESignature {
         [Parameter(Mandatory = $true, HelpMessage = "The URI for the API request, as a string.")]
         [string]$URI,
 
-        [Parameter(Mandatory = $true, HelpMessage = "The API secret for the Kraken account, as a string.")]
-        [string]$api_secret
+        [Parameter(Mandatory = $false, HelpMessage = "The API secret for the Kraken account, as a securestring.")]
+        [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET','user'))
     )
+
+    if (-not $ApiSecret) {
+        $ApiSecret = Read-Host "API Secret" -AsSecureString 
+        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
+    } else {
+        $ApiSecretEncoded = $ApiSecret
+    }
+   
+    $ApiSecretPlainText = $ApiSecretEncoded | ConvertTo-SecureString | ConvertFrom-SecureString -AsPlainText
 
     # Convert the payload to a URL-encoded string
     $url_encoded_payload = ($payload.GetEnumerator() | ForEach-Object { $_.Name + "=" + $_.Value }) -join "&"
@@ -60,8 +71,9 @@ function Set-KESignature {
     # Create an instance of the HMAC-SHA512 algorithm
     $mac = New-Object System.Security.Cryptography.HMACSHA512
 
+
     # Set the key to the API secret converted to bytes
-    $api_secret_bytes = [System.Convert]::FromBase64String($api_secret)
+    $api_secret_bytes = [System.Convert]::FromBase64String($ApiSecretPlainText)
     $mac.Key = $api_secret_bytes
 
     # Compute the HMAC-SHA512 hash of the URI and SHA256 hash

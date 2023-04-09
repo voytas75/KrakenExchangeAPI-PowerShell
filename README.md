@@ -8,7 +8,7 @@ Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchan
 
 ### Module KrakenExchange
 
-KrakenExchange 1.1.0 module has already arrived
+KrakenExchange 2.0.0 module has already arrived
 
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/1.1.0)
 

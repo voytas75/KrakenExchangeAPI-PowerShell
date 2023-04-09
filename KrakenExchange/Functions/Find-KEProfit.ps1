@@ -1,5 +1,5 @@
 function Find-KEProfit {
-<#
+    <#
 .SYNOPSIS
     Calculates the net profit from a trade on the Kraken cryptocurrency exchange.
 
@@ -32,6 +32,7 @@ function Find-KEProfit {
     Returns the net profit from selling 2 BTC for $50,000 on Kraken after fees are deducted.
 
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>
@@ -40,7 +41,7 @@ function Find-KEProfit {
     param(
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string]$Crypto = "ETH",
+        [string]$Crypto = "XBT",
 
         [Parameter()]
         [string]$Currency = "USD",
@@ -57,7 +58,7 @@ function Find-KEProfit {
         [ValidateRange(0, 0.0026)]
         [double]$SellFee = 0.0026,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [double]$SellPrice,
 
         [Parameter()]
@@ -81,6 +82,17 @@ function Find-KEProfit {
     $profitGross = $sell_cost - $buy_cost
     $costs = $buy_cost_fee + $sell_cost_fee
     $profitNet = $profitGross - $costs
-    Write-Debug "Buy price: ${buyPrice}, Sell price: ${SellPrice}, Buy fee: ${BuyFee}, Sell fee: ${SellFee}"
-    return $profitNet
+    Write-Debug "Crypto: ${Crypto}, Currency: ${Currency}, Buy price: ${buyPrice}, Sell price: ${SellPrice}, Buy fee: ${BuyFee}, Sell fee: ${SellFee}"
+    $KEProfit_object = [PSCustomObject]@{
+        Crypto       = ${Crypto}
+        Currency     = ${Currency}
+        "Buy price"  = ${buyPrice}
+        "Sell price" = ${SellPrice}
+        Amount       = ${Amount}
+        "Buy fee"    = ${BuyFee}
+        "Sell fee"   = ${SellFee}
+        profitGross  = ${profitGross}
+        profitNet    = ${profitNet}
+    }
+    return $KEProfit_object
 }

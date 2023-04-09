@@ -38,6 +38,7 @@ function Find-KEZeroProfitPrice {
     Returns the zero-profit sell price for the specified cryptocurrency and currency.
 
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>

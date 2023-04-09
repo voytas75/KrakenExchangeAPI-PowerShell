@@ -48,6 +48,7 @@ function Get-KEProfitTable {
            0,90 50450,00  34,95
            1,00 50500,00  39,95
 .NOTES
+    The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
     Author: wnapierala [@] hotmail.com, chatGPT
     Date: 03.2023
 #>
