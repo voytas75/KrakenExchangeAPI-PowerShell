@@ -49,9 +49,11 @@ function Set-KESignature {
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET','user'))
     )
 
+    Write-Debug "APISecret: ${ApiSecret}"
+
     if (-not $ApiSecret) {
-        $ApiSecret = Read-Host "API Secret" -AsSecureString 
-        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
+        [securestring]$ApiSecret = Read-Host "API Secret" -AsSecureString 
+        [string]$ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
         [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
     } else {
         $ApiSecretEncoded = $ApiSecret
