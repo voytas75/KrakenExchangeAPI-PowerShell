@@ -6,6 +6,7 @@
 
 - param alias in `Find-KEZeroProfitPrice`
 - new function `Get-KEClosedOrders`
+- new function `Get-KEOrdersInfo`
 
 ### Changed
 
