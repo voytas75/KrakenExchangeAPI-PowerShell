@@ -48,6 +48,12 @@ Note that it is important to keep your API Secret secure and not share it with a
 
 ## KrakenExchange module usage
 
+Function `Connect-KExchange` to provide API data for private:
+
+```powershell
+Connect-KExchange
+```
+
 Function `Get-KEAssetInfo`:
 
 ```powershell
@@ -122,6 +128,12 @@ PS C:\> Get-KEAssetInfo -Asset "eth,btc" | ConvertTo-Json
     }
   }
 }
+```
+
+Function `Disconnect-KExchange` to clear API data:
+
+```powershell
+Disconnect-KExchange
 ```
 
 ## Scripts usage
