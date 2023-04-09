@@ -97,7 +97,6 @@ function Get-KEClosedOrders {
             $StartDate_unixTimestamp = [Math]::Round((New-TimeSpan -Start "1/1/1970" -End $StartDate).TotalSeconds)
         }
         else {
-            $StartDate_unixTimestamp = [Math]::Round((New-TimeSpan -Start "1/1/1970").TotalSeconds)
             $StartDate_unixTimestamp = 0
         }
     
