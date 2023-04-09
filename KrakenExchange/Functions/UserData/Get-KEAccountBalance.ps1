@@ -34,10 +34,7 @@ function Get-KEAccountBalance {
     
     if (-not $ApiSecret) {
         Connect-KExchange
-<#         $ApiSecret = Read-Host "Enter API Secret" -AsSecureString
-        $ApiSecretEncoded = $ApiSecret | ConvertFrom-SecureString
-        [Environment]::SetEnvironmentVariable("KE_API_SECRET", $ApiSecretEncoded, "User")
- #>    }
+    }
     else {
         $ApiSecretEncoded = $ApiSecret
     }
