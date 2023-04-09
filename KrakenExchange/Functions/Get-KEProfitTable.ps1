@@ -64,6 +64,10 @@ function Get-KEProfitTable {
         [double]$Amount = 1,
 
         [Parameter()]
+        [ValidateRange(0, [double]::MaxValue)]
+        [double]$BuyPrice = (Invoke-RestMethod -Method GET -Uri "https://api.kraken.com/0/public/Ticker?pair=${Crypto}${Currency}").result."X${Crypto}Z${Currency}".'c'[0],
+
+        [Parameter()]
         [ValidateRange(0, 0.0026)]
         [double]$BuyFee = 0.0026,
         
@@ -71,10 +75,8 @@ function Get-KEProfitTable {
         [ValidateRange(0, 0.0026)]
         [double]$SellFee = 0.0026,
 
-        [Parameter()]
-        [ValidateRange(0, [double]::MaxValue)]
-        [double]$BuyPrice = (Invoke-RestMethod -Method GET -Uri "https://api.kraken.com/0/public/Ticker?pair=${Crypto}${Currency}").result."X${Crypto}Z${Currency}".'c'[0]
-    )
+        [double]$Step = 0.01
+        )
 
     $Crypto = $Crypto.ToUpper()
     $Currency = $Currency.ToUpper()
@@ -84,14 +86,14 @@ function Get-KEProfitTable {
     [double]$current_crypto_price = $BuyPrice
 
     # Loop through different scenarios where the price of ETH changes by a percentage from -1% to 1%
-    for ($p = -1; $p -le 1; $p += 0.1) {
+    for ($p = -1; $p -le 1; $p += $Step) {
         $percentage = $p / 100.0
         $new_crypto_price = $current_crypto_price * (1 + $percentage)
         $profit = Find-KEProfit -crypto $Crypto -amount $Amount -buyfee $BuyFee -sellfee $SellFee -SellPrice $new_crypto_price -BuyPrice $current_crypto_price
         $output = [PSCustomObject]@{
             PriceChange = $p
             Price       = $new_crypto_price
-            Profit      = $profit
+            Profit      = $profit.profitNet
         }
         $outputCollection += $output
     }

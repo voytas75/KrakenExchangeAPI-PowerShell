@@ -27,10 +27,10 @@ function Get-KETradeBalance {
     #>    
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
 
     )
@@ -38,6 +38,8 @@ function Get-KETradeBalance {
     # Check if ApiSecret is provided or needs to be retrieved
     if (-not $ApiSecret) {
         Connect-KExchange
+        $ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user'))
+        $ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
     }
     else {
         $ApiSecretEncoded = $ApiSecret
