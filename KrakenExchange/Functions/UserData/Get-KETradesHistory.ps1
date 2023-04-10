@@ -74,13 +74,11 @@ function Get-KETradesHistory {
         [int]$ofs,
 
         [bool]$consolidate_taker = $true
-
-
     )
 
     try {
+        Write-Debug ($MyInvocation.ScriptName | Out-String)
         Write-Debug ($MyInvocation.mycommand | Out-String)
-        Write-Debug ($MyInvocation.scriptname | Out-String)
         Write-Debug ($MyInvocation.BoundParameters | Out-String)
         Write-Debug ($MyInvocation.InvocationName | Out-String)
         Write-Debug ($MyInvocation.PipelineLength | Out-String)
@@ -137,24 +135,24 @@ function Get-KETradesHistory {
             "consolidate_taker" = $consolidate_taker
         }
     
-        Write-Debug ($MyInvocation.mycommand | Out-String)
-        Write-Debug ($MyInvocation.scriptname | Out-String)
-        Write-Debug ($MyInvocation.BoundParameters | Out-String)
-        Write-Debug ($MyInvocation.InvocationName | Out-String)
-        Write-Debug ($MyInvocation.PipelineLength | Out-String)
-        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
-        Write-Debug "signature: $($signature | out-string)"
-    
         # Generate signature for API request
         $signature = Set-KESignature -Payload $TradesHistoryParam -URI $TradesHistoryMethod -ApiSecret $ApiSecretEncoded
-    
+
         # Define headers for API request
         $TradesHistoryHeaders = @{ 
             "API-Key"    = $apiKey; 
             "API-Sign"   = $signature; 
             "User-Agent" = $useragent
         }
-    
+
+        Write-Debug ($MyInvocation.ScriptName | Out-String)
+        Write-Debug ($MyInvocation.mycommand | Out-String)
+        Write-Debug ($MyInvocation.BoundParameters | Out-String)
+        Write-Debug ($MyInvocation.InvocationName | Out-String)
+        Write-Debug ($MyInvocation.PipelineLength | Out-String)
+        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
+        Write-Debug "TradesHistoryHeaders: $($TradesHistoryHeaders | out-string)"
+
         # Send API request and retrieve response
         $TradesHistoryResponse = Invoke-RestMethod -Uri $TradesHistoryUrl -Method Post -body $TradesHistoryParam -Headers $TradesHistoryHeaders
     
