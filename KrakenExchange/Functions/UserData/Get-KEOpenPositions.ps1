@@ -19,7 +19,7 @@ function Get-KEOpenPositions {
         [Alias("encodedAPISecret")]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user')),
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $false)]
         [Alias("Transaction IDs", "Transaction ID")]
         [string]$txid,
 
@@ -59,9 +59,10 @@ function Get-KEOpenPositions {
     
         # Define parameters for API request
         $OpenPositionsParam = [ordered]@{
-            "nonce"             = $nonce
-            "txid"              = $txid
-            "trades"            = $Trades
+            "nonce"         = $nonce
+            "txid"          = $txid
+            "docalcs"       = $docalcs
+            "consolidation" = $consolidation
         }
     
         Write-Debug ($MyInvocation.ScriptName | Out-String)
