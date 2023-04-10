@@ -1,5 +1,32 @@
 function Get-KETradesInfo {
     <#
+    .SYNOPSIS
+    Retrieves information about trades for a given transaction ID on the Kraken exchange.
+
+    .DESCRIPTION
+    The Get-KETradesInfo function retrieves information about trades for a given transaction ID on the Kraken exchange using the Kraken API. The function requires an API key and secret for authentication.
+
+    .PARAMETER ApiKey
+    The API key to use for authentication. This parameter is optional, and if not provided, the function will attempt to retrieve the API key from the user's environment variables.
+
+    .PARAMETER ApiSecret
+    Encoded API secret to use for authentication. This parameter is optional, and if not provided, the function will attempt to retrieve the API secret from the user's environment variables.
+
+    .PARAMETER txid
+    The transaction ID for which to retrieve trade information.
+
+    .PARAMETER Trades
+    A switch parameter that indicates whether to include the trades in the response. If not specified, trades will be excluded.
+
+    .EXAMPLE
+    PS C:\> Get-KETradesInfo -txid "ABCD1234" -Trades
+
+    Retrieves information about trades for the transaction ID "ABCD1234" and includes the trades in the response.
+
+    .EXAMPLE
+    PS C:\> Get-KETradesInfo -txid "ABCD1234" -ApiKey "1234567890" -ApiSecret "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    Retrieves information about trades for the transaction ID "ABCD1234" using the specified API key and secret.
 
     .LINK
     For more information, see the Kraken API documentation:
