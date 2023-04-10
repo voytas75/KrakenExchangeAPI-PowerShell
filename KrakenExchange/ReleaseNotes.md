@@ -9,6 +9,7 @@
 - new function `Get-KEOrdersInfo`
 - new function `Get-KETradesHistory`
 - new function `Get-KETradesInfo`
+- new function `Get-KEOpenPositions`
 
 ### Changed
 
