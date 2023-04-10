@@ -1,5 +1,33 @@
 function Get-KEOrdersInfo {
     <#
+    .SYNOPSIS
+    Retrieves information about a specific order from the Kraken exchange.
+
+    .DESCRIPTION
+    The Get-KEOrdersInfo function retrieves information about a specific order from the Kraken exchange using the Kraken API. This function requires API keys from the Kraken exchange.
+
+    .PARAMETER ApiKey
+    The API key for the Kraken exchange. This parameter is optional, but if not specified, it will attempt to retrieve the key from the environment variable KE_API_KEY.
+
+    .PARAMETER ApiSecret
+    Encoded API secret for the Kraken exchange. This parameter is optional, but if not specified, it will attempt to retrieve the secret from the environment variable KE_API_SECRET.
+
+    .PARAMETER Trades
+    If this parameter is set to true, the API will also return information about the trades associated with the order.
+
+    .PARAMETER UserRefID
+    The user reference ID for the order. This parameter is optional and defaults to 0.
+
+    .PARAMETER txid
+    The transaction ID of the order to retrieve information for. This parameter is mandatory.
+
+    .PARAMETER consolidate_taker
+    If this parameter is set to true, the API will consolidate orders that have the same taker fee rate. This parameter is optional and defaults to true.
+
+    .EXAMPLE
+    PS C:\> Get-KEOrdersInfo -txid "OT5GZQ-7VBLR-5J4TEA"
+
+    Retrieves information about the order with the specified transaction ID.
 
     .LINK
     For more information, see the Kraken API documentation:
@@ -16,6 +44,7 @@ function Get-KEOrdersInfo {
         [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
 
         [Parameter(Mandatory = $false)]
+        [Alias("encodedAPISecret")]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user')),
 
         [bool]$Trades = $false,

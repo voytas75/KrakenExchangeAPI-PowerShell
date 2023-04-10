@@ -31,6 +31,7 @@ function Get-KETradeBalance {
         [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', "User")),
 
         [Parameter(Mandatory = $false)]
+        [Alias("encodedAPISecret")]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))
 
     )

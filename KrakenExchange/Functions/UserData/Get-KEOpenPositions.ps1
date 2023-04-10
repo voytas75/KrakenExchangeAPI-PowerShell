@@ -1,36 +1,9 @@
-function Get-KETradesInfo {
+function Get-KEOpenPositions {
     <#
-    .SYNOPSIS
-    Retrieves information about trades for a given transaction ID on the Kraken exchange.
-
-    .DESCRIPTION
-    The Get-KETradesInfo function retrieves information about trades for a given transaction ID on the Kraken exchange using the Kraken API. The function requires an API key and secret for authentication.
-
-    .PARAMETER ApiKey
-    The API key to use for authentication. This parameter is optional, and if not provided, the function will attempt to retrieve the API key from the user's environment variables.
-
-    .PARAMETER ApiSecret
-    Encoded API secret to use for authentication. This parameter is optional, and if not provided, the function will attempt to retrieve the API secret from the user's environment variables.
-
-    .PARAMETER txid
-    The transaction ID for which to retrieve trade information.
-
-    .PARAMETER Trades
-    A switch parameter that indicates whether to include the trades in the response. If not specified, trades will be excluded.
-
-    .EXAMPLE
-    PS C:\> Get-KETradesInfo -txid "ABCD1234" -Trades
-
-    Retrieves information about trades for the transaction ID "ABCD1234" and includes the trades in the response.
-
-    .EXAMPLE
-    PS C:\> Get-KETradesInfo -txid "ABCD1234" -ApiKey "1234567890" -ApiSecret "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-    Retrieves information about trades for the transaction ID "ABCD1234" using the specified API key and secret.
 
     .LINK
     For more information, see the Kraken API documentation:
-    https://docs.kraken.com/rest/#tag/User-Data/operation/getTradesInfo
+    https://docs.kraken.com/rest/#tag/User-Data/operation/getOpenPositions
 
     .NOTES
     The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
@@ -50,7 +23,9 @@ function Get-KETradesInfo {
         [Alias("Transaction IDs", "Transaction ID")]
         [string]$txid,
 
-        [bool]$Trades = $false
+        [bool]$docalcs = $false,
+
+        [string]$consolidation = "market"
     )
 
     try {
@@ -76,14 +51,14 @@ function Get-KETradesInfo {
     
         # Define API endpoint and version
         $endpoint = "https://api.kraken.com"
-        $TradesInfoMethod = "/0/private/QueryTrades"
-        $TradesInfoUrl = $endpoint + $TradesInfoMethod
+        $OpenPositionsMethod = "/0/private/OpenPositions"
+        $OpenPositionsUrl = $endpoint + $OpenPositionsMethod
     
         # Generate nonce for API request
         $nonce = [Math]::Round((New-TimeSpan -Start "1/1/1970").TotalMilliseconds)
     
         # Define parameters for API request
-        $TradesInfoParam = [ordered]@{
+        $OpenPositionsParam = [ordered]@{
             "nonce"             = $nonce
             "txid"              = $txid
             "trades"            = $Trades
@@ -95,13 +70,13 @@ function Get-KETradesInfo {
         Write-Debug ($MyInvocation.InvocationName | Out-String)
         Write-Debug ($MyInvocation.PipelineLength | Out-String)
         Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
-        Write-Debug "TradesInfoParam: $($TradesInfoParam | out-string)"
+        Write-Debug "OpenPositionsParam: $($OpenPositionsParam | out-string)"
     
         # Generate signature for API request
-        $signature = Set-KESignature -Payload $TradesInfoParam -URI $TradesInfoMethod -ApiSecret $ApiSecretEncoded
+        $signature = Set-KESignature -Payload $OpenPositionsParam -URI $OpenPositionsMethod -ApiSecret $ApiSecretEncoded
     
         # Define headers for API request
-        $TradesInfoHeaders = @{ 
+        $OpenPositionsHeaders = @{ 
             "API-Key"    = $apiKey; 
             "API-Sign"   = $signature; 
             "User-Agent" = $useragent
@@ -113,13 +88,13 @@ function Get-KETradesInfo {
         Write-Debug ($MyInvocation.InvocationName | Out-String)
         Write-Debug ($MyInvocation.PipelineLength | Out-String)
         Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
-        Write-Debug "TradesInfoHeaders: $($TradesInfoHeaders | out-string)"
+        Write-Debug "OpenPositionsHeaders: $($OpenPositionsHeaders | out-string)"
 
         # Send API request and retrieve response
-        $TradesInfoResponse = Invoke-RestMethod -Uri $TradesInfoUrl -Method Post -body $TradesInfoParam -Headers $TradesInfoHeaders
+        $OpenPositionsResponse = Invoke-RestMethod -Uri $OpenPositionsUrl -Method Post -body $OpenPositionsParam -Headers $OpenPositionsHeaders
     
         # Return the response
-        return $TradesInfoResponse
+        return $OpenPositionsResponse
     }
     catch {
 

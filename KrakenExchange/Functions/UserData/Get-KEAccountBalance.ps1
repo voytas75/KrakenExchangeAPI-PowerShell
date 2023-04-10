@@ -28,6 +28,7 @@ function Get-KEAccountBalance {
         [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
 
         [Parameter()]
+        [Alias("encodedAPISecret")]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
 
     )

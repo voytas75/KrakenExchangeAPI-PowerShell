@@ -40,6 +40,7 @@ function Get-KETradeVolume {
         [string]$ApiKey = ([Environment]::GetEnvironmentVariable('KE_API_KEY', 'user')),
 
         [Parameter(Mandatory = $false)]
+        [Alias("encodedAPISecret")]
         [string]$ApiSecret = ([Environment]::GetEnvironmentVariable('KE_API_SECRET', 'user'))
     )
 
