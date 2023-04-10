@@ -57,26 +57,21 @@ function Get-KETradesInfo {
         # Define parameters for API request
         $TradesInfoParam = [ordered]@{
             "nonce"             = $nonce
-            "trades"            = $Trades
-            "userref"           = $UserRefID
             "txid"              = $txid
-            "consolidate_taker" = $consolidate_taker
+            "trades"            = $Trades
         }
     
-        Write-Debug $MyInvocation.ScriptName
+        Write-Debug ($MyInvocation.ScriptName | Out-String)
+        Write-Debug ($MyInvocation.mycommand | Out-String)
+        Write-Debug ($MyInvocation.BoundParameters | Out-String)
+        Write-Debug ($MyInvocation.InvocationName | Out-String)
+        Write-Debug ($MyInvocation.PipelineLength | Out-String)
+        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
         Write-Debug "TradesInfoParam: $($TradesInfoParam | out-string)"
     
         # Generate signature for API request
         $signature = Set-KESignature -Payload $TradesInfoParam -URI $TradesInfoMethod -ApiSecret $ApiSecretEncoded
     
-        Write-Debug ($MyInvocation.mycommand | Out-String)
-        Write-Debug ($MyInvocation.scriptname | Out-String)
-        Write-Debug ($MyInvocation.BoundParameters | Out-String)
-        Write-Debug ($MyInvocation.InvocationName | Out-String)
-        Write-Debug ($MyInvocation.PipelineLength | Out-String)
-        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
-        Write-Debug "signature: $($signature | out-string)"
-
         # Define headers for API request
         $TradesInfoHeaders = @{ 
             "API-Key"    = $apiKey; 
@@ -84,6 +79,14 @@ function Get-KETradesInfo {
             "User-Agent" = $useragent
         }
     
+        Write-Debug ($MyInvocation.ScriptName | Out-String)
+        Write-Debug ($MyInvocation.mycommand | Out-String)
+        Write-Debug ($MyInvocation.BoundParameters | Out-String)
+        Write-Debug ($MyInvocation.InvocationName | Out-String)
+        Write-Debug ($MyInvocation.PipelineLength | Out-String)
+        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
+        Write-Debug "TradesInfoHeaders: $($TradesInfoHeaders | out-string)"
+
         # Send API request and retrieve response
         $TradesInfoResponse = Invoke-RestMethod -Uri $TradesInfoUrl -Method Post -body $TradesInfoParam -Headers $TradesInfoHeaders
     

@@ -1,6 +1,6 @@
 # KrakenExchange powershell module - release notes
 
-## 2.1.0 - 2023.04.09
+## 2.1.0 - 2023.04.10
 
 ### Added
 
@@ -8,6 +8,7 @@
 - new function `Get-KEClosedOrders`
 - new function `Get-KEOrdersInfo`
 - new function `Get-KETradesHistory`
+- new function `Get-KETradesInfo`
 
 ### Changed
 
