@@ -112,23 +112,23 @@ function Add-KEOrder {
         
         # Define parameters for API request
         $AddOrderParam = [ordered]@{
-            "nonce"     = $nonce
-            "userref"    = $UserRefID
+            "nonce"       = $nonce
+            "userref"     = $UserRefID
             "ordertype"   = $ordertype
-            "type"     = $type
-            "volume"       = $volume
-            "displayvol"       = $displayvol
-            "pair" = $pair
-            "price" = $price
-            "price2" = $Price2
-            "trigger" = $Trigger
-            "leverage" = $leverage
-            "reduce_only" =$reduce_only
-            "stptype" = $stptype
-            "oflags" = $oflags
+            "type"        = $type
+            "volume"      = $volume
+            "displayvol"  = $displayvol
+            "pair"        = $pair
+            "price"       = $price
+            "price2"      = $Price2
+            "trigger"     = $Trigger
+            "leverage"    = $leverage
+            "reduce_only" = $reduce_only
+            "stptype"     = $stptype
+            "oflags"      = $oflags
             "timeinforce" = $timeinforce
-            "starttm" = $starttm
-            "expiretm" = $expiretm
+            "starttm"     = $starttm
+            "expiretm"    = $expiretm
             
 
         }
