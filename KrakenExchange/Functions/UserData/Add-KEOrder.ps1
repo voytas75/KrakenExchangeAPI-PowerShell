@@ -23,10 +23,12 @@ function Add-KEOrder {
 
         [Parameter(Mandatory = $true)]
         [ValidateSet("market", "limit", "stop-loss", "take-profit", "stop-loss-limit", "take-profit-limit", "settle-position")]
+        [Alias("Order")]
         [string]$OrderType,
 
         [Parameter(Mandatory = $true)]
         [ValidateSet("buy", "sell")]
+        [Alias("Direction")]
         [string]$Type, 
 
         [Parameter(Mandatory = $true)]
@@ -36,8 +38,6 @@ function Add-KEOrder {
 
         [Parameter(Mandatory = $true)]
         [string]$Pair,
-
-        [bool]$Trades = $false,
 
         [string]$Price,
 
@@ -55,16 +55,6 @@ function Add-KEOrder {
         [string]$StpType = "cancel-newest",
 
         [string]$oflags,
-        <# 
-        oflags	
-        string (oflags)
-        Comma delimited list of order flags
-        post post-only order (available when ordertype = limit)
-        fcib prefer fee in base currency (default if selling)
-        fciq prefer fee in quote currency (default if buying, mutually exclusive with fcib)
-        nompp disable market price protection for market orders
-        viqc order volume expressed in quote currency. This is supported only for market orders.
-        #>
 
         [ValidateSet("GTC", "IOC", "GTD")]
         [string]$timeinforce = "GTC",
@@ -86,7 +76,12 @@ function Add-KEOrder {
     )
 
     try {
-        Write-Debug $MyInvocation.ScriptName
+        Write-Debug ($MyInvocation.ScriptName | Out-String)
+        Write-Debug ($MyInvocation.mycommand | Out-String)
+        Write-Debug ($MyInvocation.BoundParameters | Out-String)
+        Write-Debug ($MyInvocation.InvocationName | Out-String)
+        Write-Debug ($MyInvocation.PipelineLength | Out-String)
+        Write-Debug ($MyInvocation.ScriptLineNumber | Out-String)
         Write-Debug "APIKey env.: $([Environment]::GetEnvironmentVariable('KE_API_KEY', "User"))"
         Write-Debug "APIKey arg.: ${ApiKey}"
         Write-Debug "APISecret env.: $([Environment]::GetEnvironmentVariable('KE_API_SECRET', "User"))"
@@ -118,12 +113,24 @@ function Add-KEOrder {
         # Define parameters for API request
         $AddOrderParam = [ordered]@{
             "nonce"     = $nonce
-            "trades"    = $Trades
-            "userref"   = $UserRefID
-            "start"     = $StartDate_unixTimestamp
-            "end"       = $EndDate_unixTimestamp
-            "ofs"       = $ofs
-            "closetime" = $closetime
+            "userref"    = $UserRefID
+            "ordertype"   = $ordertype
+            "type"     = $type
+            "volume"       = $volume
+            "displayvol"       = $displayvol
+            "pair" = $pair
+            "price" = $price
+            "price2" = $Price2
+            "trigger" = $Trigger
+            "leverage" = $leverage
+            "reduce_only" =$reduce_only
+            "stptype" = $stptype
+            "oflags" = $oflags
+            "timeinforce" = $timeinforce
+            "starttm" = $starttm
+            "expiretm" = $expiretm
+            
+
         }
     
         Write-Debug $MyInvocation.ScriptName
