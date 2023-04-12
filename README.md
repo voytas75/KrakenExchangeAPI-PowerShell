@@ -50,7 +50,7 @@ Note that it is important to keep your API Secret secure and not share it with a
 
 ## KrakenExchange module usage
 
-Function `Connect-KExchange` to provide API data for private:
+Function `Connect-KExchange` to provide API data for private access:
 
 ```powershell
 Connect-KExchange
