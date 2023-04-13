@@ -32,7 +32,7 @@ https://docs.kraken.com/rest/#tag/Market-Data/operation/getOHLCData
         [string]$Pair = "XBTUSD",
 
         [Parameter()]
-        [ValidateRange(1, 1440)]
+        [ValidateSet(1,5,15,30,60,240,1440,10080)]
         [int]$OHLCInterval = 15,
 
         [Parameter()]
