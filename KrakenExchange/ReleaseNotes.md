@@ -14,6 +14,7 @@
 ### Changed
 
 - output of `Find-KEProfit`
+- param `OHLCInterval` attribute to validate set
 
 ## 2.0.0 - 2023.04.09
 

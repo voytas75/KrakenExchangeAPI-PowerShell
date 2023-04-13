@@ -10,7 +10,8 @@ The Get-OHLCData function retrieves the Open, High, Low, Close (OHLC) data for a
 The trading pair for which to retrieve OHLC data. The default is XBTUSD.
 
 .PARAMETER OHLCInterval
-The time interval, in minutes, for each OHLC datapoint. Must be a value between 1 and 1440. The default is 15.
+The interval for the OHLC data, in minutes. The parameter is optional and defaults to 15 minutes.
+Valid values for this parameter are: 1, 5, 15, 30, 60, 240, 1440, and 10080. If you specify a value that is not in this set, the function will throw an error.
 
 .PARAMETER OHLCCount
 The number of OHLC datapoints to retrieve. The default is 5.
