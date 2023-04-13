@@ -34,7 +34,7 @@ Function Get-KrakenOHLCData2 {
     )
     
     $ohlcs = Get-KEOHLCData -pair $Pair -OHLCInterval $OHLCInterval -OHLCCount $OHLCCount
-    
+    $ohlcs
     if ($null -eq $ohlcs) {
         Write-Host "No OHLC data retrieved"
     }
@@ -64,7 +64,7 @@ Function Get-KrakenOHLCData2 {
         }
     
         return $data
-        
+
     }
 }
     
