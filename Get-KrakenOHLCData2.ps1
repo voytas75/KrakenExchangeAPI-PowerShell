@@ -7,14 +7,14 @@ Function Get-KrakenOHLCData2 {
     The trading pair for which OHLC data is to be retrieved.
     
     .PARAMETER OHLCInterval
-    The interval for the OHLC data, in seconds.
+    The interval for the OHLC data, in minutes.
     
     .PARAMETER OHLCCount
     The number of OHLC data points to retrieve.
     
     .EXAMPLE
     PS C:\> Get-KrakenOHLCData2 -Pair "ETHUSD" -OHLCInterval 10080 -OHLCCount 100
-    Retrieves OHLC data for the trading pair ETHUSD with an interval of 10080 seconds and 100 data points.
+    Retrieves OHLC data for the trading pair ETHUSD with an interval of 10080 minutes and 100 data points.
     
     .NOTES
     Author: wnapierala [@] hotmail.com, @voytas75, ChatGPT
@@ -64,6 +64,7 @@ Function Get-KrakenOHLCData2 {
         }
     
         return $data
+        
     }
 }
     
