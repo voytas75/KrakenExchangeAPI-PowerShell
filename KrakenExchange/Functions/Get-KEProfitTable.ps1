@@ -55,9 +55,11 @@ function Get-KEProfitTable {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Crypto = "ETH",
 
         [Parameter(ValueFromPipeline = $true)]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Currency = "USD",
 
         [Parameter(ValueFromPipeline = $true)]

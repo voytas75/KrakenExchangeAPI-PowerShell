@@ -23,7 +23,7 @@ function Get-KETickerInformation {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [ValidatePattern("[A-Z]")]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Pair = "XBTUSD"
     )
     

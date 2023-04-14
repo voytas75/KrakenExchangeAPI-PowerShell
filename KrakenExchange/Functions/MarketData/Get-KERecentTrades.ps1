@@ -25,7 +25,7 @@ Date: 04.2023
     [CmdletBinding()]
     param ( 
         [Parameter()]
-        [ValidatePattern("[A-Z]")]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Pair = "XBTUSD",
  
         [datetime]$SinceDate = ((get-date).AddMinutes(-10))

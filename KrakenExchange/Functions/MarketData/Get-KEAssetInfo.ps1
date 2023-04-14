@@ -1,18 +1,22 @@
 function Get-KEAssetInfo {
     <#
     .SYNOPSIS
-    Retrieves information about a specific asset from the Kraken API.
-    
+    Retrieves information about a specific asset or all tradable assets from the Kraken API.
+        
     .DESCRIPTION
-    This function retrieves information about a specific asset (e.g. currency) from the Kraken API. It requires the asset symbol as input, and returns detailed information about the asset including its name, ticker, trading volume, etc.
-    
+    This function retrieves information about a specific asset (e.g. currency) from the Kraken API. It requires the asset symbol as input, and returns detailed information about the asset including its name, ticker, trading volume, etc. If the `Asset` parameter is empty, information about all tradable assets will be retrieved.
+        
     .PARAMETER Asset
-    The symbol of the asset for which information is to be retrieved.
-    
+    The symbol of the asset for which information is to be retrieved. If this parameter is empty, information about all tradable assets will be retrieved.
+        
     .EXAMPLE
-    Get-AssetInfo -Asset "XBT"
+    Get-KEAssetInfo -Asset "XBT"
     Retrieves information about the "XBT" asset (Bitcoin) from the Kraken API.
-    
+
+    .EXAMPLE
+    Get-KEAssetInfo
+    Retrieves information about all tradable assets from the Kraken API.
+        
     .LINK
     For more information, see the Kraken API documentation:
     https://docs.kraken.com/rest/#tag/Market-Data/operation/getAssetInfo
@@ -24,8 +28,10 @@ function Get-KEAssetInfo {
     #>
     [CmdletBinding()]
     param (
-        [Parameter()]
-        [string]$Asset = "BTC,ETH"
+        [Parameter(Mandatory = $false)]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
+        [Alias("Assets")]
+        [string]$Asset
     )
     
     $AssetInfoMethod = "/0/public/Assets"
@@ -33,11 +39,18 @@ function Get-KEAssetInfo {
     $UserAgent = "Powershell Module KrakenExchange/1.0"
     $AssetInfoUrl = $endpoint + $AssetInfoMethod
 
-    $AssetInfoParams = [ordered]@{ 
-        "asset"  = $Asset
-        "aclass" = "currency" 
+    if ($Asset) {
+        $AssetInfoParams = [ordered]@{ 
+            "asset"  = $Asset
+            "aclass" = "currency" 
+        }
     }
-    
+    else {
+        $AssetInfoParams = [ordered]@{ 
+            "aclass" = "currency" 
+        }
+   
+    }
     $AssetInfoHeaders = @{ 
         "User-Agent" = $UserAgent
     }

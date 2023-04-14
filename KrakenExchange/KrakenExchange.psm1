@@ -9,6 +9,8 @@ Foreach ($Function in $Functions) {
     }
 }
 
+Set-Alias -Name Get-KEAsset -Value Get-KEAssetInfo
+
 $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 
 # We switch to using TLS 1.2 because GitHub closes the connection if it uses 1.0 or 1.1
@@ -18,7 +20,7 @@ $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 $ModuleName = "KrakenExchange"
 
 # Get the installed version of the module
-$ModuleVersion = [version]"2.0.0"
+$ModuleVersion = [version]"2.1.0"
 
 $LatestModule = Find-Module -Name $ModuleName -Repository PSGallery
 

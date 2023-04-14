@@ -41,9 +41,11 @@ function Find-KEProfit {
     param(
         [Parameter()]
         [ValidateNotNullOrEmpty()]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Crypto = "XBT",
 
         [Parameter()]
+        [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
         [string]$Currency = "USD",
 
         [Parameter()]

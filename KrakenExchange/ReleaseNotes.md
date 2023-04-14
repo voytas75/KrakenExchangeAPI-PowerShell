@@ -1,20 +1,22 @@
-# KrakenExchange powershell module - release notes
+# `KrakenExchange` powershell module - release notes
 
 ## 2.1.0 - 2023.04.10
 
 ### Added
 
-- param alias in `Find-KEZeroProfitPrice`
-- new function `Get-KEClosedOrders`
-- new function `Get-KEOrdersInfo`
-- new function `Get-KETradesHistory`
-- new function `Get-KETradesInfo`
-- new function `Get-KEOpenPositions`
+- param alias in `Find-KEZeroProfitPrice`,
+- new function `Get-KEClosedOrders`,
+- new function `Get-KEOrdersInfo`,
+- new function `Get-KETradesHistory`,
+- new function `Get-KETradesInfo`,
+- new function `Get-KEOpenPositions`,
+- alias `Get-KEAsset` for function `Get-KEAssetInfo`.
 
 ### Changed
 
-- output of `Find-KEProfit`
-- param `OHLCInterval` attribute to validate set
+- output of `Find-KEProfit`,
+- param `OHLCInterval` attribute to validate set,
+- show all assets by function `Get-KEAssetInfo`.
 
 ## 2.0.0 - 2023.04.09
 
