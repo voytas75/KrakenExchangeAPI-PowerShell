@@ -1,13 +1,13 @@
 function Get-KETradableAssetPair {
     <#
     .SYNOPSIS
-    Retrieves information about a specific Kraken asset pair.
+    Retrieves information about a specific Kraken asset pair or all tradable asset pairs.
 
     .DESCRIPTION
-    The Get-KETradableAssetPair function retrieves information about a specific Kraken asset pair, such as trading fees, leverage, and margin.
+    The Get-KETradableAssetPair function retrieves information about a specific Kraken asset pair, such as trading fees, leverage, and margin. If the Pair parameter is not specified, information about all tradable asset pairs is returned.
 
     .PARAMETER Pair
-    The trading pair to retrieve information for. Default value is "XBTUSD".
+    The trading pair to retrieve information for. If not specified, information about all tradable asset pairs is returned.
 
     .PARAMETER Info
     The type of information to retrieve for the asset pair. Possible values are "info" (default), "leverage", "fees", and "margin".
@@ -18,7 +18,7 @@ function Get-KETradableAssetPair {
 
     .EXAMPLE
     PS C:\> Get-KETradableAssetPair
-    Retrieves general information about the "XBTUSD" asset pair.
+    Retrieves general information about all tradable asset pairs.
 
     .NOTES
     The KrakenExchange PowerShell module is not affiliated with or endorsed by Kraken exchange.
@@ -34,7 +34,8 @@ function Get-KETradableAssetPair {
     param (
         [Parameter()]
         [ValidatePattern("^[A-Za-z0-9]{1,10}(\.[A-Za-z0-9]{1,10})?$")]
-        [string]$Pair = "XBTUSD",
+        [Alias("AssetPair", "AssetPairs", "Pairs")]
+        [string]$Pair,
 
         [Parameter()]
         [validateSet("info", "leverage", "fees", "margin")]
@@ -46,11 +47,18 @@ function Get-KETradableAssetPair {
     $UserAgent = "Powershell Module KrakenExchange/1.0"
     $TradableAssetPairsUrl = $endpoint + $TradableAssetPairsMethod
 
-    $TradableAssetPairsParams = [ordered]@{ 
-        "pair" = $Pair
-        "info" = $info
+    if ($Pair) {
+        $TradableAssetPairsParams = [ordered]@{ 
+            "pair" = $Pair
+            "info" = $info
+        }
     }
-    
+    else {
+        $TradableAssetPairsParams = [ordered]@{ 
+            "info" = $info
+        }
+    }
+
     $TradableAssetPairsHeaders = @{ 
         "User-Agent" = $UserAgent
     }
