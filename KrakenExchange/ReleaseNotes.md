@@ -10,13 +10,17 @@
 - new function `Get-KETradesHistory`,
 - new function `Get-KETradesInfo`,
 - new function `Get-KEOpenPositions`,
-- alias `Get-KEAsset` for function `Get-KEAssetInfo`.
+- alias `Get-KEAsset` for function `Get-KEAssetInfo`,
+- alias `Get-KEAssets` for function `Get-KEAssetInfo`,
+- alias `Get-KEPairs` for function `Get-KETradableAssetPair`,
+- alias `Get-KEAssetPairs` for function `Get-KETradableAssetPair`.
 
 ### Changed
 
 - output of `Find-KEProfit`,
 - param `OHLCInterval` attribute to validate set,
 - show all assets by function `Get-KEAssetInfo`,
+- show all pairs by function `Get-KETradableAssetPair`,
 - `validatepattern` for asset, crypto and currency.
 
 ## 2.0.0 - 2023.04.09

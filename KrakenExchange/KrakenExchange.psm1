@@ -1,5 +1,5 @@
 # Import all functions in the Functions directory
-$Functions  = @( Get-ChildItem -Path $PSScriptRoot\Functions\*.ps1 -Recurse -ErrorAction SilentlyContinue )
+$Functions = @( Get-ChildItem -Path $PSScriptRoot\Functions\*.ps1 -Recurse -ErrorAction SilentlyContinue )
 Foreach ($Function in $Functions) {
     Try {
         . $Function.fullname
@@ -10,6 +10,9 @@ Foreach ($Function in $Functions) {
 }
 
 Set-Alias -Name Get-KEAsset -Value Get-KEAssetInfo
+Set-Alias -Name Get-KEAssets -Value Get-KEAssetInfo
+Set-Alias -Name Get-KEPairs -Value Get-KETradableAssetPair
+Set-Alias -Name Get-KEAssetPairs -Value Get-KETradableAssetPair
 
 $oldProtocol = [Net.ServicePointManager]::SecurityProtocol
 
