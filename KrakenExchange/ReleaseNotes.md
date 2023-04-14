@@ -1,6 +1,6 @@
 # `KrakenExchange` powershell module - release notes
 
-## 2.1.0 - 2023.04.10
+## 2.1.0 - 2023.04.14
 
 ### Added
 
@@ -16,7 +16,8 @@
 
 - output of `Find-KEProfit`,
 - param `OHLCInterval` attribute to validate set,
-- show all assets by function `Get-KEAssetInfo`.
+- show all assets by function `Get-KEAssetInfo`,
+- `validatepattern` for asset, crypto and currency.
 
 ## 2.0.0 - 2023.04.09
 
