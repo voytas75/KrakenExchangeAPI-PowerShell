@@ -76,7 +76,6 @@ function Set-KESignature {
     # Create an instance of the HMAC-SHA512 algorithm
     $mac = New-Object System.Security.Cryptography.HMACSHA512
 
-
     # Set the key to the API secret converted to bytes
     $api_secret_bytes = [System.Convert]::FromBase64String($ApiSecretPlainText)
     $mac.Key = $api_secret_bytes
