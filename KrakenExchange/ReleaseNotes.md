@@ -1,6 +1,6 @@
 # `KrakenExchange` powershell module - release notes
 
-## 2.1.0 - 2023.04.14
+## 2.1.0 - 2023.04.17
 
 ### Added
 
@@ -13,7 +13,8 @@
 - alias `Get-KEAsset` for function `Get-KEAssetInfo`,
 - alias `Get-KEAssets` for function `Get-KEAssetInfo`,
 - alias `Get-KEPairs` for function `Get-KETradableAssetPair`,
-- alias `Get-KEAssetPairs` for function `Get-KETradableAssetPair`.
+- alias `Get-KEAssetPairs` for function `Get-KETradableAssetPair`,
+- interval `21600` to `Get-KEOHLCData`.
 
 ### Changed
 
