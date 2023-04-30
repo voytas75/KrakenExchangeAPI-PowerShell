@@ -35,6 +35,7 @@ function New-KEDataFolder {
     $LogsName = "Logs"
     $OtherName = "Other"
 
+
     switch ($TargetFolder) {
         "myDocuments" { $TargetPath = $myDocumentsPath }
         "localAppData" { $TargetPath = $localAppDataPath }
@@ -42,11 +43,13 @@ function New-KEDataFolder {
     }
 
 <#     if ($TargetFolder -eq "myDocuments") {
+
         $TargetPath = $myDocumentsPath
     }
     elseif ($TargetFolder -eq "localAppData") {
         $TargetPath = $localAppDataPath
     }
+
  #>    
     # create TEMP folder
     if (-not (Test-Path -Path "${tempPath}${RootFolderName}")) {
@@ -61,6 +64,8 @@ function New-KEDataFolder {
         }
 
         New-KEEnvVariable -envName "KE_ROOTFOLDER" -envValue "${TargetPath}\${RootFolderName}"
+
+
     }
     catch {
         Write-Error "Can't create '${RootFolderName}' in '${TargetPath}'. Error message: $($PSItem.Exception.Message)"
@@ -72,11 +77,13 @@ function New-KEDataFolder {
     }
 
     try {
+
         if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${CryptocurrencyPricesName}")) {
             $_CryptocurrencyPricesFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $CryptocurrencyPricesName -ItemType Directory -ErrorAction Stop
         }
 
         New-KEEnvVariable -envName "KE_CRYPTOCURRENCYPRICESFOLDER" -envValue "${TargetPath}\${RootFolderName}\${CryptocurrencyPricesName}"
+
 
     }
     catch {
@@ -88,11 +95,13 @@ function New-KEDataFolder {
 
     }    
     try {
+
         if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${LogsName}")) {
             $_LogsFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $LogsName -ItemType Directory -ErrorAction Stop
         }
 
         New-KEEnvVariable -envName "KE_LOGSFOLDER" -envValue "${TargetPath}\${RootFolderName}\${LogsName}"
+
 
     }
     catch {
@@ -104,11 +113,13 @@ function New-KEDataFolder {
 
     }    
     try {
+
         if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${OtherName}")) {
             $_OtherFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $OtherName -ItemType Directory -ErrorAction Stop
         }
 
         New-KEEnvVariable -envName "KE_OTHERFOLDER" -envValue "${TargetPath}\${RootFolderName}\${OtherName}"
+
 
     }
     catch {
