@@ -35,14 +35,19 @@ function New-KEDataFolder {
     $LogsName = "Logs"
     $OtherName = "Other"
 
-    
-    if ($TargetFolder -eq "myDocuments") {
+    switch ($TargetFolder) {
+        "myDocuments" { $TargetPath = $myDocumentsPath }
+        "localAppData" { $TargetPath = $localAppDataPath }
+        Default {}
+    }
+
+<#     if ($TargetFolder -eq "myDocuments") {
         $TargetPath = $myDocumentsPath
     }
     elseif ($TargetFolder -eq "localAppData") {
         $TargetPath = $localAppDataPath
     }
-    
+ #>    
     # create TEMP folder
     if (-not (Test-Path -Path "${tempPath}\${RootFolderName}")) {
         $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
