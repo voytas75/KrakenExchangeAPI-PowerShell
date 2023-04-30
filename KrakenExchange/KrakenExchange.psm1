@@ -36,10 +36,8 @@ if ($ModuleVersion -lt $LatestModule.Version) {
  #>
 [Net.ServicePointManager]::SecurityProtocol = $oldProtocol
 
-# generate folder data
-New-KEDataFolder -TargetFolder "myDocuments"
 
-
+[void](New-KEDataFolder -TargetFolder "myDocuments")
 
 
 #region Best Practise

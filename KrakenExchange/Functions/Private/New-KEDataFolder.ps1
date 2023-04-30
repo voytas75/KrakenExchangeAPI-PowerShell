@@ -35,21 +35,37 @@ function New-KEDataFolder {
     $LogsName = "Logs"
     $OtherName = "Other"
 
-    
-    if ($TargetFolder -eq "myDocuments") {
+
+    switch ($TargetFolder) {
+        "myDocuments" { $TargetPath = $myDocumentsPath }
+        "localAppData" { $TargetPath = $localAppDataPath }
+        Default {}
+    }
+
+<#     if ($TargetFolder -eq "myDocuments") {
+
         $TargetPath = $myDocumentsPath
     }
     elseif ($TargetFolder -eq "localAppData") {
         $TargetPath = $localAppDataPath
     }
-    
-    # create TEMP folder
-    $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
 
+ #>    
+    # create TEMP folder
+    if (-not (Test-Path -Path "${tempPath}${RootFolderName}")) {
+        $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
+    }
+    New-KEEnvVariable -envName "KE_TEMP" -envValue "${tempPath}${RootFolderName}"
 
     # create data folders
     try {
-        $_RootFolder = New-Item -Path $TargetPath -Name $RootFolderName -ItemType Directory -ErrorAction Stop
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}")) {
+            $_RootFolder = New-Item -Path $TargetPath -Name $RootFolderName -ItemType Directory -ErrorAction Stop
+        }
+
+        New-KEEnvVariable -envName "KE_ROOTFOLDER" -envValue "${TargetPath}\${RootFolderName}"
+
+
     }
     catch {
         Write-Error "Can't create '${RootFolderName}' in '${TargetPath}'. Error message: $($PSItem.Exception.Message)"
@@ -61,8 +77,14 @@ function New-KEDataFolder {
     }
 
     try {
-        $_CryptocurrencyPricesFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $CryptocurrencyPricesName -ItemType Directory -ErrorAction Stop
-    
+
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${CryptocurrencyPricesName}")) {
+            $_CryptocurrencyPricesFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $CryptocurrencyPricesName -ItemType Directory -ErrorAction Stop
+        }
+
+        New-KEEnvVariable -envName "KE_CRYPTOCURRENCYPRICESFOLDER" -envValue "${TargetPath}\${RootFolderName}\${CryptocurrencyPricesName}"
+
+
     }
     catch {
         Write-Error "Can't create '${CryptocurrencyPricesName}' in '${TargetPath}\${RootFolderName}'. Error message: $($PSItem.Exception.Message)"
@@ -73,8 +95,14 @@ function New-KEDataFolder {
 
     }    
     try {
-        $_LogsFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $LogsName -ItemType Directory -ErrorAction Stop
-    
+
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${LogsName}")) {
+            $_LogsFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $LogsName -ItemType Directory -ErrorAction Stop
+        }
+
+        New-KEEnvVariable -envName "KE_LOGSFOLDER" -envValue "${TargetPath}\${RootFolderName}\${LogsName}"
+
+
     }
     catch {
         Write-Error "Can't create '${LogsName}' in '${TargetPath}\${RootFolderName}'. Error message: $($PSItem.Exception.Message)"
@@ -85,8 +113,14 @@ function New-KEDataFolder {
 
     }    
     try {
-        $_OtherFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $OtherName -ItemType Directory -ErrorAction Stop
-    
+
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${OtherName}")) {
+            $_OtherFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $OtherName -ItemType Directory -ErrorAction Stop
+        }
+
+        New-KEEnvVariable -envName "KE_OTHERFOLDER" -envValue "${TargetPath}\${RootFolderName}\${OtherName}"
+
+
     }
     catch {
         Write-Error "Can't create '${OtherName}' in '${TargetPath}\${RootFolderName}'. Error message: $($PSItem.Exception.Message)"

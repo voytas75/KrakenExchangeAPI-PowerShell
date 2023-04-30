@@ -1,6 +1,6 @@
 # `KrakenExchange` powershell module - release notes
 
-## 2.1.0 - 2023.04.22
+## 2.1.0 - 2023.04.30
 
 ### Added
 
@@ -15,7 +15,8 @@
 - alias `Get-KEPairs` for function `Get-KETradableAssetPair`,
 - alias `Get-KEAssetPairs` for function `Get-KETradableAssetPair`,
 - interval `21600` to `Get-KEOHLCData`,
-- new private function `New-KEDataFolder` for create kraken data folder.
+- new private function `New-KEDataFolder` for create kraken data folder,
+- new private function `New-KEEnvVariable` for environment variable.
 
 ### Changed
 
