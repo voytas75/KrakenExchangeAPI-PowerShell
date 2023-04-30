@@ -36,6 +36,12 @@ if ($ModuleVersion -lt $LatestModule.Version) {
  #>
 [Net.ServicePointManager]::SecurityProtocol = $oldProtocol
 
+# generate folder data
+New-KEDataFolder -TargetFolder "myDocuments"
+
+
+
+
 #region Best Practise
 <# 
 Use approved verbs: Use approved PowerShell verbs to name your functions. This helps ensure that your function names are consistent with other PowerShell cmdlets, making them easier to remember and reducing the likelihood of naming conflicts. You can use the Get-Verb cmdlet to see a list of approved verbs.
