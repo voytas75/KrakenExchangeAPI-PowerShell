@@ -14,7 +14,6 @@ function New-KEEnvVariable {
     #env:$envName = $envValue
     [System.Environment]::SetEnvironmentVariable($envName, $envValue, "User")
     
-    Write-Verbose "${envName}: ${envValue}, '$([System.Environment]::GetEnvironmentVariable($envName,"user"))'" -verbose
-
+    Write-Verbose "${envName}: ${envValue}, '$([System.Environment]::GetEnvironmentVariable($envName,"user"))'"
 
 }
