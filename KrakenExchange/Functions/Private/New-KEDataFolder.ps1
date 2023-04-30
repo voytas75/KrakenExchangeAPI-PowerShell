@@ -49,10 +49,10 @@ function New-KEDataFolder {
     }
  #>    
     # create TEMP folder
-    if (-not (Test-Path -Path "${tempPath}\${RootFolderName}")) {
+    if (-not (Test-Path -Path "${tempPath}${RootFolderName}")) {
         $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
     }
-    New-KEEnvVariable -envName "KE_temp" -envValue "${tempPath}\${RootFolderName}"
+    New-KEEnvVariable -envName "KE_temp" -envValue "${tempPath}${RootFolderName}"
 
     # create data folders
     try {
