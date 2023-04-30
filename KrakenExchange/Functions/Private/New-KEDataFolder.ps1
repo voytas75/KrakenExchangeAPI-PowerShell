@@ -44,12 +44,17 @@ function New-KEDataFolder {
     }
     
     # create TEMP folder
-    $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
+    if (-not (Test-Path -Path "${tempPath}\${RootFolderName}")) {
+        $_TEMPFolder = New-Item -Path $tempPath -Name $RootFolderName -ItemType Directory
+    }
     New-KEEnvVariable -envName "KE_temp" -envValue $_TEMPFolder.FullName
 
     # create data folders
     try {
-        $_RootFolder = New-Item -Path $TargetPath -Name $RootFolderName -ItemType Directory -ErrorAction Stop
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}")) {
+            $_RootFolder = New-Item -Path $TargetPath -Name $RootFolderName -ItemType Directory -ErrorAction Stop
+        }
+
         New-KEEnvVariable -envName "KE_RootFolder" -envValue $_RootFolder.FullName
     }
     catch {
@@ -62,7 +67,10 @@ function New-KEDataFolder {
     }
 
     try {
-        $_CryptocurrencyPricesFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $CryptocurrencyPricesName -ItemType Directory -ErrorAction Stop
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${CryptocurrencyPricesName}")) {
+            $_CryptocurrencyPricesFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $CryptocurrencyPricesName -ItemType Directory -ErrorAction Stop
+        }
+
         New-KEEnvVariable -envName "KE_CryptocurrencyPricesFolder" -envValue $_CryptocurrencyPricesFolder.FullName
 
     }
@@ -75,7 +83,10 @@ function New-KEDataFolder {
 
     }    
     try {
-        $_LogsFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $LogsName -ItemType Directory -ErrorAction Stop
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${LogsName}")) {
+            $_LogsFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $LogsName -ItemType Directory -ErrorAction Stop
+        }
+
         New-KEEnvVariable -envName "KE_LogsFolder" -envValue $_LogsFolder.FullName
 
     }
@@ -88,7 +99,10 @@ function New-KEDataFolder {
 
     }    
     try {
-        $_OtherFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $OtherName -ItemType Directory -ErrorAction Stop
+        if (-not (Test-Path -Path "${TargetPath}\${RootFolderName}\${OtherName}")) {
+            $_OtherFolder = New-Item -Path "${TargetPath}\${RootFolderName}" -Name $OtherName -ItemType Directory -ErrorAction Stop
+        }
+
         New-KEEnvVariable -envName "KE_OtherFolder" -envValue $_OtherFolder.FullName
 
     }
