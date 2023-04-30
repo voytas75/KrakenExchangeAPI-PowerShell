@@ -10,10 +10,11 @@ function New-KEEnvVariable {
     [CmdletBinding()]
     param (
            [string]$envName, 
-           $envValue
+           [string]$envValue
     )
 
-    env:$envName = $envValue
+    #env:$envName = $envValue
+    [Environment]::SetEnvironmentVariable($envName, $envValue, "User")
 
 
 
