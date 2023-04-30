@@ -14,7 +14,8 @@
 - alias `Get-KEAssets` for function `Get-KEAssetInfo`,
 - alias `Get-KEPairs` for function `Get-KETradableAssetPair`,
 - alias `Get-KEAssetPairs` for function `Get-KETradableAssetPair`,
-- interval `21600` to `Get-KEOHLCData`.
+- interval `21600` to `Get-KEOHLCData`,
+- new private function `New-KEDataFolder` for create kraken data folder.
 
 ### Changed
 
