@@ -6,6 +6,8 @@ This PowerShell scripts and module [KrakenExchange](https://www.powershellgaller
 
 ## Installation
 
+Note: This PowerShell module is only compatible with **PowerShell version 7 and above**. If you are running an older version of PowerShell, you will need to upgrade to use this module.
+
 Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) module or download scripts from [releases](https://github.com/voytas75/KrakenExchangeAPI-PowerShell/releases).
 
 ### Module KrakenExchange
