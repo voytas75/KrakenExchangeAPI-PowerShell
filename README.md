@@ -1,34 +1,33 @@
 # KrakenExchangeAPI-PowerShell
 
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/2.0.0)
+
 Note: The module and scripts are not affiliated with Kraken or any other cryptocurrency exchange, and use of is at your own risk.
 
 This PowerShell scripts and module [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) provide an easy way to interact with the Kraken Exchange API. It includes cmdlets for querying account information, getting ticker information for a specific currency pair, ...
 
+[KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) is a PowerShell module that allows you to interact with the Kraken cryptocurrency exchange API. In this first version of the module, you can easily retrieve your account balance.
+
+Future versions of the module will expand on this functionality, providing even more powerful tools for automating trading strategies and performing market analysis. You will be able to get ticker information for a specific asset pair, place buy and sell orders, get your trade history, and much more. The module also supports getting open orders and canceling orders, making it a comprehensive tool for managing your trades.
+
+KrakenExchange is designed to be flexible and customizable, allowing you to easily integrate it into your existing PowerShell scripts and automation workflows. Whether you're a seasoned trader or just getting started with cryptocurrency trading, this module provides a powerful toolset to help you succeed in the market.
+
 ## Installation
-
-Note: This PowerShell module is only compatible with **PowerShell version 7 and above**. If you are running an older version of PowerShell, you will need to upgrade to use this module.
-
-Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) module or download scripts from [releases](https://github.com/voytas75/KrakenExchangeAPI-PowerShell/releases).
 
 ### Module KrakenExchange
 
 KrakenExchange 2.0.0 module has already arrived
 
-[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/2.0.0)
+
+Note: This PowerShell module is only compatible with **PowerShell version 7 and above**. If you are running an older version of PowerShell, you will need to upgrade to use this module.
+
+Install [KrakenExchange](https://www.powershellgallery.com/packages/KrakenExchange) module or download scripts from [releases](https://github.com/voytas75/KrakenExchangeAPI-PowerShell/releases).
 
 Installation:
 
 ```powershell
 Install-Module -Name KrakenExchange
 ```
-
-KrakenExchange is a PowerShell module that allows you to interact with the Kraken cryptocurrency exchange API. In this first version of the module, you can easily retrieve your account balance.
-
-Future versions of the module will expand on this functionality, providing even more powerful tools for automating trading strategies and performing market analysis. You will be able to get ticker information for a specific asset pair, place buy and sell orders, get your trade history, and much more. The module also supports getting open orders and canceling orders, making it a comprehensive tool for managing your trades.
-
-KrakenExchange is designed to be flexible and customizable, allowing you to easily integrate it into your existing PowerShell scripts and automation workflows. Whether you're a seasoned trader or just getting started with cryptocurrency trading, this module provides a powerful toolset to help you succeed in the market.
-
-Note: This module is not affiliated with Kraken or any other cryptocurrency exchange, and use of the module is at your own risk.
 
 ## ApiKey and ApiSecret
 
