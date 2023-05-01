@@ -1,5 +1,8 @@
 # KrakenExchangeAPI-PowerShell
 
+| :exclamation:  Module was moved to <https://github.com/voytas75/KrakenExchange> |
+|---------------------------------------------------------------------------------|
+
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/krakenexchange?label=KrakenExchange%20)](https://www.powershellgallery.com/packages/KrakenExchange/2.0.0)
 
 Note: The module and scripts are not affiliated with Kraken or any other cryptocurrency exchange, and use of is at your own risk.
